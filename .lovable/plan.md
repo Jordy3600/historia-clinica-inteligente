@@ -1,0 +1,1 @@
+Construyo HistorIA: auth por doctor (email + contraseña), dashboard para pegar historial clínico y generar resumen en 5 secciones con Gemini, historial privado por doctor, PDF/imprimir, tema oscuro. Lovable Cloud para auth + Postgres con RLS. Aprueba para empezar.
