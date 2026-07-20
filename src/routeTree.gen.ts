@@ -14,6 +14,7 @@ import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
 import { Route as AuthenticatedHistorialIndexRouteImport } from './routes/_authenticated/historial.index'
+import { Route as AuthenticatedHistorialIdRouteImport } from './routes/_authenticated/historial.$id'
 
 const AuthRoute = AuthRouteImport.update({
   id: '/auth',
@@ -40,17 +41,25 @@ const AuthenticatedHistorialIndexRoute =
     path: '/historial/',
     getParentRoute: () => AuthenticatedRouteRoute,
   } as any)
+const AuthenticatedHistorialIdRoute =
+  AuthenticatedHistorialIdRouteImport.update({
+    id: '/historial/$id',
+    path: '/historial/$id',
+    getParentRoute: () => AuthenticatedRouteRoute,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/historial/$id': typeof AuthenticatedHistorialIdRoute
   '/historial/': typeof AuthenticatedHistorialIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/auth': typeof AuthRoute
   '/dashboard': typeof AuthenticatedDashboardRoute
+  '/historial/$id': typeof AuthenticatedHistorialIdRoute
   '/historial': typeof AuthenticatedHistorialIndexRoute
 }
 export interface FileRoutesById {
@@ -59,19 +68,21 @@ export interface FileRoutesById {
   '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
   '/auth': typeof AuthRoute
   '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
+  '/_authenticated/historial/$id': typeof AuthenticatedHistorialIdRoute
   '/_authenticated/historial/': typeof AuthenticatedHistorialIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/historial/'
+  fullPaths: '/' | '/auth' | '/dashboard' | '/historial/$id' | '/historial/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/historial'
+  to: '/' | '/auth' | '/dashboard' | '/historial/$id' | '/historial'
   id:
     | '__root__'
     | '/'
     | '/_authenticated'
     | '/auth'
     | '/_authenticated/dashboard'
+    | '/_authenticated/historial/$id'
     | '/_authenticated/historial/'
   fileRoutesById: FileRoutesById
 }
@@ -118,16 +129,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AuthenticatedHistorialIndexRouteImport
       parentRoute: typeof AuthenticatedRouteRoute
     }
+    '/_authenticated/historial/$id': {
+      id: '/_authenticated/historial/$id'
+      path: '/historial/$id'
+      fullPath: '/historial/$id'
+      preLoaderRoute: typeof AuthenticatedHistorialIdRouteImport
+      parentRoute: typeof AuthenticatedRouteRoute
+    }
   }
 }
 
 interface AuthenticatedRouteRouteChildren {
   AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
+  AuthenticatedHistorialIdRoute: typeof AuthenticatedHistorialIdRoute
   AuthenticatedHistorialIndexRoute: typeof AuthenticatedHistorialIndexRoute
 }
 
 const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
   AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
+  AuthenticatedHistorialIdRoute: AuthenticatedHistorialIdRoute,
   AuthenticatedHistorialIndexRoute: AuthenticatedHistorialIndexRoute,
 }
 
