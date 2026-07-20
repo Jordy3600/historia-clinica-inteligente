@@ -14,7 +14,48 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      patient_summaries: {
+        Row: {
+          alertas: string
+          antecedentes: string
+          created_at: string
+          diagnostico: string
+          doctor_id: string
+          id: string
+          motivo_consulta: string
+          patient_code: string | null
+          patient_name: string
+          raw_history: string
+          tratamiento: string
+        }
+        Insert: {
+          alertas?: string
+          antecedentes?: string
+          created_at?: string
+          diagnostico?: string
+          doctor_id: string
+          id?: string
+          motivo_consulta?: string
+          patient_code?: string | null
+          patient_name: string
+          raw_history: string
+          tratamiento?: string
+        }
+        Update: {
+          alertas?: string
+          antecedentes?: string
+          created_at?: string
+          diagnostico?: string
+          doctor_id?: string
+          id?: string
+          motivo_consulta?: string
+          patient_code?: string | null
+          patient_name?: string
+          raw_history?: string
+          tratamiento?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
