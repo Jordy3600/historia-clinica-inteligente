@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Stethoscope } from "lucide-react";
 import { useAuth } from "@/lib/auth";
 import { Navigate } from "@/lib/react-router-dom";
-import { AppLayout } from "@/pages/app-layout";
+import AppLayout from "@/pages/app-layout";
 
 export const Route = createFileRoute("/app")({
   ssr: false,

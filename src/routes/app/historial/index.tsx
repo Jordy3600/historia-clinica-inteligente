@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { HistorialPage } from "@/pages/historial";
+import HistorialPage from "@/pages/historial";
 
 export const Route = createFileRoute("/app/historial/")({
   ssr: false,
