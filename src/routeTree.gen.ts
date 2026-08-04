@@ -21,6 +21,9 @@ import { Route as AppMapaRouteImport } from './routes/app/mapa'
 import { Route as AppConfiguracionRouteImport } from './routes/app/configuracion'
 import { Route as AppAsistenteRouteImport } from './routes/app/asistente'
 import { Route as AppAgendaRouteImport } from './routes/app/agenda'
+import { Route as ApiTranscribeRouteImport } from './routes/api/transcribe'
+import { Route as ApiGenerateMedicalImageRouteImport } from './routes/api/generate-medical-image'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
 import { Route as AppHistorialIndexRouteImport } from './routes/app/historial/index'
 import { Route as AppHistorialIdRouteImport } from './routes/app/historial/$id'
 
@@ -84,6 +87,21 @@ const AppAgendaRoute = AppAgendaRouteImport.update({
   path: '/agenda',
   getParentRoute: () => AppRoute,
 } as any)
+const ApiTranscribeRoute = ApiTranscribeRouteImport.update({
+  id: '/api/transcribe',
+  path: '/api/transcribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateMedicalImageRoute = ApiGenerateMedicalImageRouteImport.update({
+  id: '/api/generate-medical-image',
+  path: '/api/generate-medical-image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AppHistorialIndexRoute = AppHistorialIndexRouteImport.update({
   id: '/historial/',
   path: '/historial/',
@@ -99,6 +117,9 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/generate-medical-image': typeof ApiGenerateMedicalImageRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
   '/app/agenda': typeof AppAgendaRoute
   '/app/asistente': typeof AppAsistenteRoute
   '/app/configuracion': typeof AppConfiguracionRoute
@@ -114,6 +135,9 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/login': typeof LoginRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/generate-medical-image': typeof ApiGenerateMedicalImageRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
   '/app/agenda': typeof AppAgendaRoute
   '/app/asistente': typeof AppAsistenteRoute
   '/app/configuracion': typeof AppConfiguracionRoute
@@ -131,6 +155,9 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/app': typeof AppRouteWithChildren
   '/login': typeof LoginRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/generate-medical-image': typeof ApiGenerateMedicalImageRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
   '/app/agenda': typeof AppAgendaRoute
   '/app/asistente': typeof AppAsistenteRoute
   '/app/configuracion': typeof AppConfiguracionRoute
@@ -149,6 +176,9 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/login'
+    | '/api/chat'
+    | '/api/generate-medical-image'
+    | '/api/transcribe'
     | '/app/agenda'
     | '/app/asistente'
     | '/app/configuracion'
@@ -164,6 +194,9 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/login'
+    | '/api/chat'
+    | '/api/generate-medical-image'
+    | '/api/transcribe'
     | '/app/agenda'
     | '/app/asistente'
     | '/app/configuracion'
@@ -180,6 +213,9 @@ export interface FileRouteTypes {
     | '/'
     | '/app'
     | '/login'
+    | '/api/chat'
+    | '/api/generate-medical-image'
+    | '/api/transcribe'
     | '/app/agenda'
     | '/app/asistente'
     | '/app/configuracion'
@@ -197,6 +233,9 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AppRoute: typeof AppRouteWithChildren
   LoginRoute: typeof LoginRoute
+  ApiChatRoute: typeof ApiChatRoute
+  ApiGenerateMedicalImageRoute: typeof ApiGenerateMedicalImageRoute
+  ApiTranscribeRoute: typeof ApiTranscribeRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -285,6 +324,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AppAgendaRouteImport
       parentRoute: typeof AppRoute
     }
+    '/api/transcribe': {
+      id: '/api/transcribe'
+      path: '/api/transcribe'
+      fullPath: '/api/transcribe'
+      preLoaderRoute: typeof ApiTranscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-medical-image': {
+      id: '/api/generate-medical-image'
+      path: '/api/generate-medical-image'
+      fullPath: '/api/generate-medical-image'
+      preLoaderRoute: typeof ApiGenerateMedicalImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/app/historial/': {
       id: '/app/historial/'
       path: '/historial'
@@ -336,7 +396,20 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AppRoute: AppRouteWithChildren,
   LoginRoute: LoginRoute,
+  ApiChatRoute: ApiChatRoute,
+  ApiGenerateMedicalImageRoute: ApiGenerateMedicalImageRoute,
+  ApiTranscribeRoute: ApiTranscribeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
+
+import type { getRouter } from './router.tsx'
+import type { startInstance } from './start.ts'
+declare module '@tanstack/react-start' {
+  interface Register {
+    ssr: true
+    router: Awaited<ReturnType<typeof getRouter>>
+    config: Awaited<ReturnType<typeof startInstance.getOptions>>
+  }
+}
