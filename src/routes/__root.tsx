@@ -13,6 +13,10 @@ import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
 import { supabase } from "@/integrations/supabase/client";
 import { Toaster } from "sonner";
+import { AuthProvider } from "@/lib/auth";
+import { ThemeProvider, useTheme } from "@/lib/theme";
+import { I18nProvider } from "@/lib/i18n";
+import { SummaryProvider } from "@/lib/summary-context";
 
 function NotFoundComponent() {
   return (
@@ -79,10 +83,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "HistorIA — Resúmenes clínicos con IA" },
-      { name: "description", content: "Organiza el historial clínico de tus pacientes en un resumen profesional con IA. Para clínicas pequeñas en Perú." },
-      { property: "og:title", content: "HistorIA — Resúmenes clínicos con IA" },
-      { property: "og:description", content: "Organiza el historial clínico de tus pacientes en un resumen profesional con IA." },
+      { title: "HistorIA — Historias clínicas con IA" },
+      { name: "description", content: "Plataforma clínica con IA: resúmenes, agenda, pacientes, mapa de clínicas y reportes para clínicas en Perú." },
+      { property: "og:title", content: "HistorIA — Historias clínicas con IA" },
+      { property: "og:description", content: "Plataforma clínica con IA para clínicas en Perú." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
     ],
@@ -94,7 +98,10 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { rel: "icon", href: "/favicon.ico", type: "image/x-icon" },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" },
+      {
+        rel: "stylesheet",
+        href: "https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Source+Serif+4:wght@400;600&display=swap",
+      },
     ],
   }),
   shellComponent: RootShell,
@@ -117,6 +124,24 @@ function RootShell({ children }: { children: ReactNode }) {
   );
 }
 
+function ThemedToaster() {
+  const { theme } = useTheme();
+  return (
+    <Toaster
+      theme={theme}
+      position="top-right"
+      richColors
+      toastOptions={{
+        style: {
+          background: theme === "dark" ? "#0F172A" : "#FFFFFF",
+          border: theme === "dark" ? "1px solid #1E293B" : "1px solid #E2E8F0",
+          color: theme === "dark" ? "#F8FAFC" : "#0F172A",
+        },
+      }}
+    />
+  );
+}
+
 function RootComponent() {
   const { queryClient } = Route.useRouteContext();
 
@@ -131,8 +156,16 @@ function RootComponent() {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Outlet />
-      <Toaster theme="dark" position="top-right" richColors />
+      <AuthProvider>
+        <ThemeProvider>
+          <I18nProvider>
+            <SummaryProvider>
+              <Outlet />
+              <ThemedToaster />
+            </SummaryProvider>
+          </I18nProvider>
+        </ThemeProvider>
+      </AuthProvider>
     </QueryClientProvider>
   );
 }
