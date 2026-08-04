@@ -216,7 +216,7 @@ export default function AgendaPage() {
               {t('agenda.nuevo')}
             </>
           )}
-        </Button>
+        </button>
       </div>
 
       {showForm && (
