@@ -45,6 +45,7 @@ import {
   Calculator,
   ChevronRight,
   ListOrdered,
+  Globe,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useI18n } from '@/lib/i18n';
@@ -946,10 +947,10 @@ RESUMEN ESTRUCTURADO:
           }
         };
 
-        recognition.onerror = (e: any) => {
+        recognition.onerror = ((e: any) => {
           setListening(false);
           toast.error(`Error en dictado por voz (${e?.error || 'desconocido'})`);
-        };
+        }) as () => void;
 
         recognition.start();
         recognitionRef.current = recognition;
@@ -1308,7 +1309,7 @@ RESUMEN ESTRUCTURADO:
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={handleNewChat}
+              onClick={handleCreateNewChat}
               className="flex h-8 w-8 items-center justify-center rounded-full bg-[#182030] text-text-2 hover:bg-[#202b40] hover:text-text-1 transition-all cursor-pointer"
               title="Nuevo chat"
             >
@@ -1826,7 +1827,7 @@ RESUMEN ESTRUCTURADO:
                   onClick={() => {
                     if (messages.length > 0) {
                       const lastAiMessage = [...messages].reverse().find((m) => m.role === 'assistant');
-                      if (lastAiMessage) playSpeech(lastAiMessage.content, lastAiMessage.id);
+                      if (lastAiMessage) speakAssistantMessage(lastAiMessage.content, lastAiMessage.id);
                     } else {
                       toast.info("Escribe una consulta para escuchar la lectura médica");
                     }
