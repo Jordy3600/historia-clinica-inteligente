@@ -223,7 +223,7 @@ export default function MapaClinicasPage() {
         if (!error && data && data.length > 0) {
           const mapById = new Map<string, Clinic>();
           combined.forEach((c) => mapById.set(c.id, c));
-          data.forEach((c: Clinic) => mapById.set(c.id, c));
+          data.forEach((c) => mapById.set(c.id, c as unknown as Clinic));
           combined = Array.from(mapById.values());
         }
       } catch {}
