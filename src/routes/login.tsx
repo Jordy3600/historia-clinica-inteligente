@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { AuthPage } from "@/pages/auth";
 
-export const Route = createFileRoute("/")({
+export const Route = createFileRoute("/login")({
   ssr: false,
   head: () => ({
     meta: [
