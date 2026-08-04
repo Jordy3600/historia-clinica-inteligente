@@ -1,11 +1,4 @@
-import { createClient } from '@supabase/supabase-js';
-
-const supabaseUrl = import.meta.env.VITE_SUPABASE_URL || 'https://placeholder.supabase.co';
-const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY || 'placeholder-anon-key';
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey, {
-  auth: { persistSession: true, autoRefreshToken: true },
-});
+export { supabase } from '@/integrations/supabase/client';
 
 export interface PatientSummary {
   id: string;
@@ -22,4 +15,7 @@ export interface PatientSummary {
 }
 
 export type SummaryListItem = Pick<PatientSummary, 'id' | 'patient_name' | 'patient_code' | 'created_at'>;
-export type SummarySections = Pick<PatientSummary, 'motivo_consulta' | 'antecedentes' | 'diagnostico' | 'alertas' | 'tratamiento'>;
+export type SummarySections = Pick<
+  PatientSummary,
+  'motivo_consulta' | 'antecedentes' | 'diagnostico' | 'alertas' | 'tratamiento'
+>;
