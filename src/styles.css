@@ -4,16 +4,8 @@
 
 /* Light theme (default) */
 :root {
-  --color-bg: #f8fafc;
-  --color-bg-card: #ffffff;
-  --color-bg-hover: #f1f5f9;
-  --color-border: #e2e8f0;
-  --color-border-2: #cbd5e1;
-  --color-text-1: #0f172a;
-  --color-text-2: #475569;
-  --color-text-3: #94a3b8;
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(226, 232, 240, 0.8);
-  --shadow-card-hover: 0 8px 24px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(20, 184, 166, 0.3);
+  --shadow-card-value: 0 1px 3px rgba(0, 0, 0, 0.05), 0 0 0 1px rgba(226, 232, 240, 0.8);
+  --shadow-card-hover-value: 0 8px 24px rgba(0, 0, 0, 0.08), 0 0 0 1px rgba(20, 184, 166, 0.3);
   --color-scrollbar-thumb: #cbd5e1;
   --color-scrollbar-thumb-hover: #94a3b8;
   --color-selection: rgba(20, 184, 166, 0.2);
@@ -30,26 +22,23 @@
   --color-text-1: #f8fafc;
   --color-text-2: #94a3b8;
   --color-text-3: #64748b;
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(30, 41, 59, 0.8);
-  --shadow-card-hover: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(20, 184, 166, 0.35);
+  --shadow-card-value: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(30, 41, 59, 0.8);
+  --shadow-card-hover-value: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(20, 184, 166, 0.35);
   --color-scrollbar-thumb: #1e293b;
   --color-scrollbar-thumb-hover: #334155;
   --color-selection: rgba(20, 184, 166, 0.25);
   --color-selection-text: #f8fafc;
 }
 
-@theme inline {
-  --color-bg: var(--color-bg);
-  --color-bg-card: var(--color-bg-card);
-  --color-bg-hover: var(--color-bg-hover);
-  --color-border: var(--color-border);
-  --color-border-2: var(--color-border-2);
-  --color-text-1: var(--color-text-1);
-  --color-text-2: var(--color-text-2);
-  --color-text-3: var(--color-text-3);
-}
-
 @theme {
+  --color-bg: #f8fafc;
+  --color-bg-card: #ffffff;
+  --color-bg-hover: #f1f5f9;
+  --color-border: #e2e8f0;
+  --color-border-2: #cbd5e1;
+  --color-text-1: #0f172a;
+  --color-text-2: #475569;
+  --color-text-3: #94a3b8;
   --color-blue: #2563eb;
   --color-blue-hover: #1d4ed8;
   --color-blue-dim: rgba(37, 99, 235, 0.15);
@@ -69,8 +58,8 @@
   --font-serif: "Source Serif 4", Georgia, serif;
 
   --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-  --shadow-card: var(--shadow-card);
-  --shadow-card-hover: var(--shadow-card-hover);
+  --shadow-card: var(--shadow-card-value);
+  --shadow-card-hover: var(--shadow-card-hover-value);
   --shadow-glow-blue: 0 0 24px rgba(37, 99, 235, 0.4);
   --shadow-glow-teal: 0 0 20px rgba(20, 184, 166, 0.3);
 
