@@ -754,11 +754,11 @@ HISTORIAL BRUTO Y MOTIVO DE CONSULTA:
 ${found.raw_history || 'No especificado'}
 
 RESUMEN ESTRUCTURADO:
-- Anamnesis / Síntomas: ${found.anamnesis || 'N/A'}
-- Examen Físico: ${found.examen_fisico || 'N/A'}
+- Motivo de consulta: ${found.motivo_consulta || 'N/A'}
+- Antecedentes médicos: ${found.antecedentes || 'N/A'}
 - Diagnóstico: ${found.diagnostico || 'N/A'}
 - Tratamiento y Plan: ${found.tratamiento || 'N/A'}
-- Evolución / Notas adicionales: ${found.evolucion || 'N/A'}
+- Alertas y alergias: ${found.alertas || 'N/A'}
 `.trim();
   };
 

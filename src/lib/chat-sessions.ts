@@ -24,8 +24,8 @@ export interface ChatSession {
   updatedAt: string;
   pinned?: boolean;
   patientId?: string; // 'none' or patient summary UUID
-  patientName?: string;
-  patientCode?: string;
+  patientName?: string | null;
+  patientCode?: string | null;
   messages: Message[];
 }
 
@@ -163,7 +163,7 @@ export function sortSessions(sessions: ChatSession[]): ChatSession[] {
   });
 }
 
-export function createNewSession(patientId: string = 'none', patientName?: string, patientCode?: string): ChatSession {
+export function createNewSession(patientId: string = 'none', patientName?: string | null, patientCode?: string | null): ChatSession {
   const defaultTitle =
     patientId !== 'none' && patientName
       ? `Consulta sobre ${patientName}`
