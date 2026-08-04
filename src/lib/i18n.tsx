@@ -186,14 +186,19 @@ interface I18nContextValue {
 const I18nContext = createContext<I18nContextValue | undefined>(undefined);
 
 export function I18nProvider({ children }: { children: ReactNode }) {
-  const [lang, setLangState] = useState<Lang>(() => {
+  const [lang, setLangState] = useState<Lang>('es');
+  const [hydrated, setHydrated] = useState(false);
+
+  // Read the persisted language after hydration so SSR and the first client render match.
+  useEffect(() => {
     const saved = localStorage.getItem('historia-lang') as Lang | null;
-    return saved ?? 'es';
-  });
+    if (saved) setLangState(saved);
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem('historia-lang', lang);
-  }, [lang]);
+    if (hydrated) localStorage.setItem('historia-lang', lang);
+  }, [lang, hydrated]);
 
   const t = (key: string): string => DICTS[lang][key] ?? DICTS.es[key] ?? key;
   const setLang = (l: Lang) => setLangState(l);

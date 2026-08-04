@@ -50,16 +50,17 @@ const AuthContext = createContext<AuthContextValue | undefined>(undefined);
 
 export function AuthProvider({ children }: { children: ReactNode }) {
   const [session, setSession] = useState<Session | null>(null);
-  const [userProfile, setUserProfile] = useState<UserProfile>(() => {
+  const [userProfile, setUserProfile] = useState<UserProfile>(DEFAULT_PROFILE);
+  const [isDemoUser, setIsDemoUser] = useState<boolean>(false);
+
+  // Browser-only state is restored after hydration; localStorage is unavailable during SSR.
+  useEffect(() => {
     const saved = localStorage.getItem('historia_user_profile');
     if (saved) {
-      try { return JSON.parse(saved); } catch {}
+      try { setUserProfile(JSON.parse(saved)); } catch {}
     }
-    return DEFAULT_PROFILE;
-  });
-  const [isDemoUser, setIsDemoUser] = useState<boolean>(() => {
-    return localStorage.getItem('historia_demo_mode') === 'true';
-  });
+    setIsDemoUser(localStorage.getItem('historia_demo_mode') === 'true');
+  }, []);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {

@@ -11,17 +11,22 @@ interface ThemeContextValue {
 const ThemeContext = createContext<ThemeContextValue | undefined>(undefined);
 
 export function ThemeProvider({ children }: { children: ReactNode }) {
-  const [theme, setThemeState] = useState<Theme>(() => {
+  const [theme, setThemeState] = useState<Theme>('dark');
+  const [hydrated, setHydrated] = useState(false);
+
+  // Read the persisted theme after hydration so SSR and the first client render match.
+  useEffect(() => {
     const saved = localStorage.getItem('historia-theme') as Theme | null;
-    return saved ?? 'dark';
-  });
+    if (saved) setThemeState(saved);
+    setHydrated(true);
+  }, []);
 
   useEffect(() => {
-    localStorage.setItem('historia-theme', theme);
+    if (hydrated) localStorage.setItem('historia-theme', theme);
     const root = document.documentElement;
     if (theme === 'dark') root.classList.add('dark');
     else root.classList.remove('dark');
-  }, [theme]);
+  }, [theme, hydrated]);
 
   const setTheme = (t: Theme) => setThemeState(t);
   const toggleTheme = () => setThemeState((prev) => (prev === 'dark' ? 'light' : 'dark'));
