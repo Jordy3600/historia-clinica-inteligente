@@ -9,20 +9,32 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as AuthRouteImport } from './routes/auth'
-import { Route as AuthenticatedRouteRouteImport } from './routes/_authenticated/route'
+import { Route as LoginRouteImport } from './routes/login'
+import { Route as AppRouteImport } from './routes/app'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as AuthenticatedDashboardRouteImport } from './routes/_authenticated/dashboard'
-import { Route as AuthenticatedHistorialIndexRouteImport } from './routes/_authenticated/historial.index'
-import { Route as AuthenticatedHistorialIdRouteImport } from './routes/_authenticated/historial.$id'
+import { Route as AppIndexRouteImport } from './routes/app/index'
+import { Route as AppResultadoRouteImport } from './routes/app/resultado'
+import { Route as AppReportesRouteImport } from './routes/app/reportes'
+import { Route as AppPacientesRouteImport } from './routes/app/pacientes'
+import { Route as AppNuevaConsultaRouteImport } from './routes/app/nueva-consulta'
+import { Route as AppMapaRouteImport } from './routes/app/mapa'
+import { Route as AppConfiguracionRouteImport } from './routes/app/configuracion'
+import { Route as AppAsistenteRouteImport } from './routes/app/asistente'
+import { Route as AppAgendaRouteImport } from './routes/app/agenda'
+import { Route as ApiTranscribeRouteImport } from './routes/api/transcribe'
+import { Route as ApiGenerateMedicalImageRouteImport } from './routes/api/generate-medical-image'
+import { Route as ApiChatRouteImport } from './routes/api/chat'
+import { Route as AppHistorialIndexRouteImport } from './routes/app/historial/index'
+import { Route as AppHistorialIdRouteImport } from './routes/app/historial/$id'
 
-const AuthRoute = AuthRouteImport.update({
-  id: '/auth',
-  path: '/auth',
+const LoginRoute = LoginRouteImport.update({
+  id: '/login',
+  path: '/login',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedRouteRoute = AuthenticatedRouteRouteImport.update({
-  id: '/_authenticated',
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -30,82 +42,216 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AuthenticatedDashboardRoute = AuthenticatedDashboardRouteImport.update({
-  id: '/dashboard',
-  path: '/dashboard',
-  getParentRoute: () => AuthenticatedRouteRoute,
+const AppIndexRoute = AppIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AppRoute,
 } as any)
-const AuthenticatedHistorialIndexRoute =
-  AuthenticatedHistorialIndexRouteImport.update({
-    id: '/historial/',
-    path: '/historial/',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
-const AuthenticatedHistorialIdRoute =
-  AuthenticatedHistorialIdRouteImport.update({
-    id: '/historial/$id',
-    path: '/historial/$id',
-    getParentRoute: () => AuthenticatedRouteRoute,
-  } as any)
+const AppResultadoRoute = AppResultadoRouteImport.update({
+  id: '/resultado',
+  path: '/resultado',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppReportesRoute = AppReportesRouteImport.update({
+  id: '/reportes',
+  path: '/reportes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPacientesRoute = AppPacientesRouteImport.update({
+  id: '/pacientes',
+  path: '/pacientes',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppNuevaConsultaRoute = AppNuevaConsultaRouteImport.update({
+  id: '/nueva-consulta',
+  path: '/nueva-consulta',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppMapaRoute = AppMapaRouteImport.update({
+  id: '/mapa',
+  path: '/mapa',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppConfiguracionRoute = AppConfiguracionRouteImport.update({
+  id: '/configuracion',
+  path: '/configuracion',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAsistenteRoute = AppAsistenteRouteImport.update({
+  id: '/asistente',
+  path: '/asistente',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAgendaRoute = AppAgendaRouteImport.update({
+  id: '/agenda',
+  path: '/agenda',
+  getParentRoute: () => AppRoute,
+} as any)
+const ApiTranscribeRoute = ApiTranscribeRouteImport.update({
+  id: '/api/transcribe',
+  path: '/api/transcribe',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiGenerateMedicalImageRoute = ApiGenerateMedicalImageRouteImport.update({
+  id: '/api/generate-medical-image',
+  path: '/api/generate-medical-image',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiChatRoute = ApiChatRouteImport.update({
+  id: '/api/chat',
+  path: '/api/chat',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AppHistorialIndexRoute = AppHistorialIndexRouteImport.update({
+  id: '/historial/',
+  path: '/historial/',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppHistorialIdRoute = AppHistorialIdRouteImport.update({
+  id: '/historial/$id',
+  path: '/historial/$id',
+  getParentRoute: () => AppRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
-  '/historial/$id': typeof AuthenticatedHistorialIdRoute
-  '/historial/': typeof AuthenticatedHistorialIndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/login': typeof LoginRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/generate-medical-image': typeof ApiGenerateMedicalImageRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
+  '/app/agenda': typeof AppAgendaRoute
+  '/app/asistente': typeof AppAsistenteRoute
+  '/app/configuracion': typeof AppConfiguracionRoute
+  '/app/mapa': typeof AppMapaRoute
+  '/app/nueva-consulta': typeof AppNuevaConsultaRoute
+  '/app/pacientes': typeof AppPacientesRoute
+  '/app/reportes': typeof AppReportesRoute
+  '/app/resultado': typeof AppResultadoRoute
+  '/app/': typeof AppIndexRoute
+  '/app/historial/$id': typeof AppHistorialIdRoute
+  '/app/historial/': typeof AppHistorialIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
-  '/auth': typeof AuthRoute
-  '/dashboard': typeof AuthenticatedDashboardRoute
-  '/historial/$id': typeof AuthenticatedHistorialIdRoute
-  '/historial': typeof AuthenticatedHistorialIndexRoute
+  '/login': typeof LoginRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/generate-medical-image': typeof ApiGenerateMedicalImageRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
+  '/app/agenda': typeof AppAgendaRoute
+  '/app/asistente': typeof AppAsistenteRoute
+  '/app/configuracion': typeof AppConfiguracionRoute
+  '/app/mapa': typeof AppMapaRoute
+  '/app/nueva-consulta': typeof AppNuevaConsultaRoute
+  '/app/pacientes': typeof AppPacientesRoute
+  '/app/reportes': typeof AppReportesRoute
+  '/app/resultado': typeof AppResultadoRoute
+  '/app': typeof AppIndexRoute
+  '/app/historial/$id': typeof AppHistorialIdRoute
+  '/app/historial': typeof AppHistorialIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
-  '/_authenticated': typeof AuthenticatedRouteRouteWithChildren
-  '/auth': typeof AuthRoute
-  '/_authenticated/dashboard': typeof AuthenticatedDashboardRoute
-  '/_authenticated/historial/$id': typeof AuthenticatedHistorialIdRoute
-  '/_authenticated/historial/': typeof AuthenticatedHistorialIndexRoute
+  '/app': typeof AppRouteWithChildren
+  '/login': typeof LoginRoute
+  '/api/chat': typeof ApiChatRoute
+  '/api/generate-medical-image': typeof ApiGenerateMedicalImageRoute
+  '/api/transcribe': typeof ApiTranscribeRoute
+  '/app/agenda': typeof AppAgendaRoute
+  '/app/asistente': typeof AppAsistenteRoute
+  '/app/configuracion': typeof AppConfiguracionRoute
+  '/app/mapa': typeof AppMapaRoute
+  '/app/nueva-consulta': typeof AppNuevaConsultaRoute
+  '/app/pacientes': typeof AppPacientesRoute
+  '/app/reportes': typeof AppReportesRoute
+  '/app/resultado': typeof AppResultadoRoute
+  '/app/': typeof AppIndexRoute
+  '/app/historial/$id': typeof AppHistorialIdRoute
+  '/app/historial/': typeof AppHistorialIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/auth' | '/dashboard' | '/historial/$id' | '/historial/'
+  fullPaths:
+    | '/'
+    | '/app'
+    | '/login'
+    | '/api/chat'
+    | '/api/generate-medical-image'
+    | '/api/transcribe'
+    | '/app/agenda'
+    | '/app/asistente'
+    | '/app/configuracion'
+    | '/app/mapa'
+    | '/app/nueva-consulta'
+    | '/app/pacientes'
+    | '/app/reportes'
+    | '/app/resultado'
+    | '/app/'
+    | '/app/historial/$id'
+    | '/app/historial/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/auth' | '/dashboard' | '/historial/$id' | '/historial'
+  to:
+    | '/'
+    | '/login'
+    | '/api/chat'
+    | '/api/generate-medical-image'
+    | '/api/transcribe'
+    | '/app/agenda'
+    | '/app/asistente'
+    | '/app/configuracion'
+    | '/app/mapa'
+    | '/app/nueva-consulta'
+    | '/app/pacientes'
+    | '/app/reportes'
+    | '/app/resultado'
+    | '/app'
+    | '/app/historial/$id'
+    | '/app/historial'
   id:
     | '__root__'
     | '/'
-    | '/_authenticated'
-    | '/auth'
-    | '/_authenticated/dashboard'
-    | '/_authenticated/historial/$id'
-    | '/_authenticated/historial/'
+    | '/app'
+    | '/login'
+    | '/api/chat'
+    | '/api/generate-medical-image'
+    | '/api/transcribe'
+    | '/app/agenda'
+    | '/app/asistente'
+    | '/app/configuracion'
+    | '/app/mapa'
+    | '/app/nueva-consulta'
+    | '/app/pacientes'
+    | '/app/reportes'
+    | '/app/resultado'
+    | '/app/'
+    | '/app/historial/$id'
+    | '/app/historial/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
-  AuthenticatedRouteRoute: typeof AuthenticatedRouteRouteWithChildren
-  AuthRoute: typeof AuthRoute
+  AppRoute: typeof AppRouteWithChildren
+  LoginRoute: typeof LoginRoute
+  ApiChatRoute: typeof ApiChatRoute
+  ApiGenerateMedicalImageRoute: typeof ApiGenerateMedicalImageRoute
+  ApiTranscribeRoute: typeof ApiTranscribeRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/auth': {
-      id: '/auth'
-      path: '/auth'
-      fullPath: '/auth'
-      preLoaderRoute: typeof AuthRouteImport
+    '/login': {
+      id: '/login'
+      path: '/login'
+      fullPath: '/login'
+      preLoaderRoute: typeof LoginRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated': {
-      id: '/_authenticated'
-      path: ''
-      fullPath: '/'
-      preLoaderRoute: typeof AuthenticatedRouteRouteImport
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -115,60 +261,145 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/_authenticated/dashboard': {
-      id: '/_authenticated/dashboard'
-      path: '/dashboard'
-      fullPath: '/dashboard'
-      preLoaderRoute: typeof AuthenticatedDashboardRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+    '/app/': {
+      id: '/app/'
+      path: '/'
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/_authenticated/historial/': {
-      id: '/_authenticated/historial/'
+    '/app/resultado': {
+      id: '/app/resultado'
+      path: '/resultado'
+      fullPath: '/app/resultado'
+      preLoaderRoute: typeof AppResultadoRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/reportes': {
+      id: '/app/reportes'
+      path: '/reportes'
+      fullPath: '/app/reportes'
+      preLoaderRoute: typeof AppReportesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/pacientes': {
+      id: '/app/pacientes'
+      path: '/pacientes'
+      fullPath: '/app/pacientes'
+      preLoaderRoute: typeof AppPacientesRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/nueva-consulta': {
+      id: '/app/nueva-consulta'
+      path: '/nueva-consulta'
+      fullPath: '/app/nueva-consulta'
+      preLoaderRoute: typeof AppNuevaConsultaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/mapa': {
+      id: '/app/mapa'
+      path: '/mapa'
+      fullPath: '/app/mapa'
+      preLoaderRoute: typeof AppMapaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/configuracion': {
+      id: '/app/configuracion'
+      path: '/configuracion'
+      fullPath: '/app/configuracion'
+      preLoaderRoute: typeof AppConfiguracionRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/asistente': {
+      id: '/app/asistente'
+      path: '/asistente'
+      fullPath: '/app/asistente'
+      preLoaderRoute: typeof AppAsistenteRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/agenda': {
+      id: '/app/agenda'
+      path: '/agenda'
+      fullPath: '/app/agenda'
+      preLoaderRoute: typeof AppAgendaRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/api/transcribe': {
+      id: '/api/transcribe'
+      path: '/api/transcribe'
+      fullPath: '/api/transcribe'
+      preLoaderRoute: typeof ApiTranscribeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/generate-medical-image': {
+      id: '/api/generate-medical-image'
+      path: '/api/generate-medical-image'
+      fullPath: '/api/generate-medical-image'
+      preLoaderRoute: typeof ApiGenerateMedicalImageRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/chat': {
+      id: '/api/chat'
+      path: '/api/chat'
+      fullPath: '/api/chat'
+      preLoaderRoute: typeof ApiChatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/app/historial/': {
+      id: '/app/historial/'
       path: '/historial'
-      fullPath: '/historial/'
-      preLoaderRoute: typeof AuthenticatedHistorialIndexRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      fullPath: '/app/historial/'
+      preLoaderRoute: typeof AppHistorialIndexRouteImport
+      parentRoute: typeof AppRoute
     }
-    '/_authenticated/historial/$id': {
-      id: '/_authenticated/historial/$id'
+    '/app/historial/$id': {
+      id: '/app/historial/$id'
       path: '/historial/$id'
-      fullPath: '/historial/$id'
-      preLoaderRoute: typeof AuthenticatedHistorialIdRouteImport
-      parentRoute: typeof AuthenticatedRouteRoute
+      fullPath: '/app/historial/$id'
+      preLoaderRoute: typeof AppHistorialIdRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
-interface AuthenticatedRouteRouteChildren {
-  AuthenticatedDashboardRoute: typeof AuthenticatedDashboardRoute
-  AuthenticatedHistorialIdRoute: typeof AuthenticatedHistorialIdRoute
-  AuthenticatedHistorialIndexRoute: typeof AuthenticatedHistorialIndexRoute
+interface AppRouteChildren {
+  AppAgendaRoute: typeof AppAgendaRoute
+  AppAsistenteRoute: typeof AppAsistenteRoute
+  AppConfiguracionRoute: typeof AppConfiguracionRoute
+  AppMapaRoute: typeof AppMapaRoute
+  AppNuevaConsultaRoute: typeof AppNuevaConsultaRoute
+  AppPacientesRoute: typeof AppPacientesRoute
+  AppReportesRoute: typeof AppReportesRoute
+  AppResultadoRoute: typeof AppResultadoRoute
+  AppIndexRoute: typeof AppIndexRoute
+  AppHistorialIdRoute: typeof AppHistorialIdRoute
+  AppHistorialIndexRoute: typeof AppHistorialIndexRoute
 }
 
-const AuthenticatedRouteRouteChildren: AuthenticatedRouteRouteChildren = {
-  AuthenticatedDashboardRoute: AuthenticatedDashboardRoute,
-  AuthenticatedHistorialIdRoute: AuthenticatedHistorialIdRoute,
-  AuthenticatedHistorialIndexRoute: AuthenticatedHistorialIndexRoute,
+const AppRouteChildren: AppRouteChildren = {
+  AppAgendaRoute: AppAgendaRoute,
+  AppAsistenteRoute: AppAsistenteRoute,
+  AppConfiguracionRoute: AppConfiguracionRoute,
+  AppMapaRoute: AppMapaRoute,
+  AppNuevaConsultaRoute: AppNuevaConsultaRoute,
+  AppPacientesRoute: AppPacientesRoute,
+  AppReportesRoute: AppReportesRoute,
+  AppResultadoRoute: AppResultadoRoute,
+  AppIndexRoute: AppIndexRoute,
+  AppHistorialIdRoute: AppHistorialIdRoute,
+  AppHistorialIndexRoute: AppHistorialIndexRoute,
 }
 
-const AuthenticatedRouteRouteWithChildren =
-  AuthenticatedRouteRoute._addFileChildren(AuthenticatedRouteRouteChildren)
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
-  AuthenticatedRouteRoute: AuthenticatedRouteRouteWithChildren,
-  AuthRoute: AuthRoute,
+  AppRoute: AppRouteWithChildren,
+  LoginRoute: LoginRoute,
+  ApiChatRoute: ApiChatRoute,
+  ApiGenerateMedicalImageRoute: ApiGenerateMedicalImageRoute,
+  ApiTranscribeRoute: ApiTranscribeRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
   ._addFileTypes<FileRouteTypes>()
-
-import type { getRouter } from './router.tsx'
-import type { startInstance } from './start.ts'
-declare module '@tanstack/react-start' {
-  interface Register {
-    ssr: true
-    router: Awaited<ReturnType<typeof getRouter>>
-    config: Awaited<ReturnType<typeof startInstance.getOptions>>
-  }
-}

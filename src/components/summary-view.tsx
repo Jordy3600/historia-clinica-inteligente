@@ -21,21 +21,16 @@ export function SummaryView({ data }: { data: SummaryData }) {
   return (
     <div className="grid gap-4">
       {SECTIONS.map(({ key, label, Icon, highlight }, i) => (
-        <Card
-          key={key}
-          className={`print-card ${highlight ? "border-destructive/40 bg-destructive/5" : ""}`}
-        >
+        <Card key={key} className={`print-card ${highlight ? "border-error/40 bg-error/5" : ""}`}>
           <CardHeader className="pb-2">
             <CardTitle className="flex items-center gap-2 text-base">
-              <Icon className={`h-4 w-4 ${highlight ? "text-destructive" : "text-primary"}`} />
-              <span className="text-muted-foreground text-xs font-medium">{i + 1}.</span>
+              <Icon className={`h-4 w-4 ${highlight ? "text-error" : "text-teal"}`} />
+              <span className="text-text-3 text-xs font-medium">{i + 1}.</span>
               {label}
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <p className="whitespace-pre-wrap text-sm leading-relaxed">
-              {data[key] || "No consignado"}
-            </p>
+            <p className="whitespace-pre-wrap text-sm leading-relaxed">{data[key] || "No consignado"}</p>
           </CardContent>
         </Card>
       ))}

@@ -14,6 +14,78 @@ export type Database = {
   }
   public: {
     Tables: {
+      chat_messages: {
+        Row: {
+          attachments: Json | null
+          content: string
+          created_at: string
+          id: string
+          patient_id: string | null
+          role: string
+          user_id: string
+        }
+        Insert: {
+          attachments?: Json | null
+          content: string
+          created_at?: string
+          id?: string
+          patient_id?: string | null
+          role: string
+          user_id?: string
+        }
+        Update: {
+          attachments?: Json | null
+          content?: string
+          created_at?: string
+          id?: string
+          patient_id?: string | null
+          role?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      clinics: {
+        Row: {
+          address: string
+          created_at: string
+          created_by: string | null
+          id: string
+          lat: number
+          lng: number
+          name: string
+          phone: string | null
+          rating: number | null
+          specialty: string
+          type: string
+        }
+        Insert: {
+          address: string
+          created_at?: string
+          created_by?: string | null
+          id: string
+          lat: number
+          lng: number
+          name: string
+          phone?: string | null
+          rating?: number | null
+          specialty?: string
+          type?: string
+        }
+        Update: {
+          address?: string
+          created_at?: string
+          created_by?: string | null
+          id?: string
+          lat?: number
+          lng?: number
+          name?: string
+          phone?: string | null
+          rating?: number | null
+          specialty?: string
+          type?: string
+        }
+        Relationships: []
+      }
       patient_summaries: {
         Row: {
           alertas: string
@@ -33,7 +105,7 @@ export type Database = {
           antecedentes?: string
           created_at?: string
           diagnostico?: string
-          doctor_id: string
+          doctor_id?: string
           id?: string
           motivo_consulta?: string
           patient_code?: string | null
@@ -53,6 +125,45 @@ export type Database = {
           patient_name?: string
           raw_history?: string
           tratamiento?: string
+        }
+        Relationships: []
+      }
+      reminders: {
+        Row: {
+          completed: boolean
+          created_at: string
+          doctor_id: string
+          id: string
+          notes: string | null
+          patient_code: string | null
+          patient_name: string
+          reminder_date: string
+          reminder_time: string | null
+          reminder_type: string
+        }
+        Insert: {
+          completed?: boolean
+          created_at?: string
+          doctor_id?: string
+          id?: string
+          notes?: string | null
+          patient_code?: string | null
+          patient_name: string
+          reminder_date: string
+          reminder_time?: string | null
+          reminder_type?: string
+        }
+        Update: {
+          completed?: boolean
+          created_at?: string
+          doctor_id?: string
+          id?: string
+          notes?: string | null
+          patient_code?: string | null
+          patient_name?: string
+          reminder_date?: string
+          reminder_time?: string | null
+          reminder_type?: string
         }
         Relationships: []
       }
