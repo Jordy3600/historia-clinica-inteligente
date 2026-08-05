@@ -14,18 +14,18 @@
 
 /* Dark theme (deep clinical dark) */
 .dark {
-  --color-bg: #090e17;
-  --color-bg-card: #0f172a;
-  --color-bg-hover: #1e293b;
-  --color-border: #1e293b;
-  --color-border-2: #334155;
+  --color-bg: #050607;
+  --color-bg-card: #0c0e10;
+  --color-bg-hover: #16191d;
+  --color-border: #1c2024;
+  --color-border-2: #2b3238;
   --color-text-1: #f8fafc;
-  --color-text-2: #94a3b8;
-  --color-text-3: #64748b;
+  --color-text-2: #a1a8b3;
+  --color-text-3: #6b7480;
   --shadow-card-value: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(30, 41, 59, 0.8);
   --shadow-card-hover-value: 0 8px 30px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(20, 184, 166, 0.35);
-  --color-scrollbar-thumb: #1e293b;
-  --color-scrollbar-thumb-hover: #334155;
+  --color-scrollbar-thumb: #23282e;
+  --color-scrollbar-thumb-hover: #333a42;
   --color-selection: rgba(20, 184, 166, 0.25);
   --color-selection-text: #f8fafc;
 }
@@ -67,6 +67,14 @@
   --animate-slide-up: slide-up 0.35s ease-out;
   --animate-pulse-dot: pulse-dot 2s ease-in-out infinite;
 
+  @keyframes ai-orb-spin {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
   @keyframes fade-in {
     0% {
       opacity: 0;
@@ -148,6 +156,10 @@
 
 @utility card-section {
   @apply rounded-2xl border border-border bg-bg-card p-5 shadow-xs transition-all duration-200 hover:border-border-2;
+}
+
+@utility ai-orb-spin {
+  animation: ai-orb-spin 6s linear infinite;
 }
 
 @media print {

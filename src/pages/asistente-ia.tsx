@@ -1,8 +1,11 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import MarkdownMessage from '@/components/MarkdownMessage';
+import AiOrb from '@/components/AiOrb';
 import {
   Send,
   ArrowUp,
+  ArrowLeft,
   AudioLines,
   Bot,
   User,
@@ -203,7 +206,11 @@ function getBestNaturalSpanishVoice(): SpeechSynthesisVoice | null {
 
 function FormattedAssistantMessage({ text }: { text: string }) {
   if (!text) return null;
+  return <MarkdownMessage text={text} />;
+}
 
+function LegacyFormattedAssistantMessage({ text }: { text: string }) {
+  if (!text) return null;
   // Render formatted lines & markdown blocks nicely
   const lines = text.split('\n');
   const renderedElements: React.ReactNode[] = [];
@@ -1296,6 +1303,15 @@ RESUMEN ESTRUCTURADO:
         {/* Header Bar Minimalista (Exactamente como en la Imagen de Referencia) */}
         <div className="bg-bg px-5 py-4 z-10 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => history.back()}
+              className="flex h-8 w-8 items-center justify-center rounded-full text-text-2 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
+              title="Volver"
+              aria-label="Volver"
+            >
+              <ArrowLeft className="h-4.5 w-4.5" />
+            </button>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal/15 text-teal border border-teal/30">
               <Stethoscope className="h-5 w-5" />
             </div>
@@ -1307,6 +1323,7 @@ RESUMEN ESTRUCTURADO:
 
           {/* Right Header Buttons: (+) and (...) */}
           <div className="flex items-center gap-2">
+            <AiOrb size={22} className="mr-1" />
             <button
               type="button"
               onClick={handleCreateNewChat}
@@ -1817,26 +1834,9 @@ RESUMEN ESTRUCTURADO:
                       handleSubmit(e);
                     }
                   }}
-                  placeholder="Pregunta sobre un paciente o escribe tu consulta médica..."
+                  placeholder="Preguntar lo que quieras"
                   className="w-full bg-transparent text-sm text-text-1 placeholder:text-text-3 outline-none border-none focus:outline-none focus:ring-0"
                 />
-
-                {/* Icono de Formas de Onda (Waveform) */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (messages.length > 0) {
-                      const lastAiMessage = [...messages].reverse().find((m) => m.role === 'assistant');
-                      if (lastAiMessage) speakAssistantMessage(lastAiMessage.content, lastAiMessage.id);
-                    } else {
-                      toast.info("Escribe una consulta para escuchar la lectura médica");
-                    }
-                  }}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#182030] text-text-2 hover:text-teal hover:bg-[#202b40] transition-colors flex-shrink-0 cursor-pointer"
-                  title="Reproducir síntesis de voz"
-                >
-                  <AudioLines className="h-4 w-4" />
-                </button>
               </div>
 
               {/* Fila Inferior: Botón +, Micrófono a la izquierda; Botón Enviar Celeste a la derecha */}
@@ -1987,14 +1987,34 @@ RESUMEN ESTRUCTURADO:
                 </div>
 
                 {/* Botón Enviar Celeste (#00A8C6) */}
-                <button
-                  type="submit"
-                  disabled={thinking || isGeneratingImage || (!input.trim() && attachments.length === 0)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#00a8c6] hover:bg-[#00c2e0] text-slate-950 shadow-[0_0_15px_rgba(0,168,198,0.4)] transition-all duration-200 active:scale-95 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed font-bold"
-                  title="Enviar consulta médica (Enter)"
-                >
-                  <ArrowUp className="h-5 w-5 stroke-[3]" />
-                </button>
+                {input.trim() || attachments.length > 0 ? (
+                  <button
+                    type="submit"
+                    disabled={thinking || isGeneratingImage}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#00d3ee] hover:bg-[#3ce0f5] text-slate-950 shadow-[0_0_18px_rgba(0,211,238,0.45)] transition-all duration-200 active:scale-95 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed font-bold"
+                    title="Enviar consulta médica (Enter)"
+                    aria-label="Enviar consulta"
+                  >
+                    <ArrowUp className="h-5 w-5 stroke-[3]" />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const lastAiMessage = [...messages].reverse().find((m) => m.role === 'assistant');
+                      if (lastAiMessage) {
+                        speakAssistantMessage(lastAiMessage.content, lastAiMessage.id);
+                      } else {
+                        toggleVoice();
+                      }
+                    }}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#00d3ee] hover:bg-[#3ce0f5] text-slate-950 shadow-[0_0_18px_rgba(0,211,238,0.45)] transition-all duration-200 active:scale-95 cursor-pointer font-bold"
+                    title="Escuchar / dictar"
+                    aria-label="Modo voz"
+                  >
+                    <AudioLines className="h-5 w-5 stroke-[2.5]" />
+                  </button>
+                )}
               </div>
             </div>
 
