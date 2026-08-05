@@ -203,7 +203,11 @@ function getBestNaturalSpanishVoice(): SpeechSynthesisVoice | null {
 
 function FormattedAssistantMessage({ text }: { text: string }) {
   if (!text) return null;
+  return <MarkdownMessage text={text} />;
+}
 
+function LegacyFormattedAssistantMessage({ text }: { text: string }) {
+  if (!text) return null;
   // Render formatted lines & markdown blocks nicely
   const lines = text.split('\n');
   const renderedElements: React.ReactNode[] = [];
