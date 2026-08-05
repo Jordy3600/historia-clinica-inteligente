@@ -1834,26 +1834,9 @@ RESUMEN ESTRUCTURADO:
                       handleSubmit(e);
                     }
                   }}
-                  placeholder="Pregunta sobre un paciente o escribe tu consulta médica..."
+                  placeholder="Preguntar lo que quieras"
                   className="w-full bg-transparent text-sm text-text-1 placeholder:text-text-3 outline-none border-none focus:outline-none focus:ring-0"
                 />
-
-                {/* Icono de Formas de Onda (Waveform) */}
-                <button
-                  type="button"
-                  onClick={() => {
-                    if (messages.length > 0) {
-                      const lastAiMessage = [...messages].reverse().find((m) => m.role === 'assistant');
-                      if (lastAiMessage) speakAssistantMessage(lastAiMessage.content, lastAiMessage.id);
-                    } else {
-                      toast.info("Escribe una consulta para escuchar la lectura médica");
-                    }
-                  }}
-                  className="flex h-8 w-8 items-center justify-center rounded-full bg-[#182030] text-text-2 hover:text-teal hover:bg-[#202b40] transition-colors flex-shrink-0 cursor-pointer"
-                  title="Reproducir síntesis de voz"
-                >
-                  <AudioLines className="h-4 w-4" />
-                </button>
               </div>
 
               {/* Fila Inferior: Botón +, Micrófono a la izquierda; Botón Enviar Celeste a la derecha */}
