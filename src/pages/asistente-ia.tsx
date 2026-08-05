@@ -1987,14 +1987,34 @@ RESUMEN ESTRUCTURADO:
                 </div>
 
                 {/* Botón Enviar Celeste (#00A8C6) */}
-                <button
-                  type="submit"
-                  disabled={thinking || isGeneratingImage || (!input.trim() && attachments.length === 0)}
-                  className="flex h-10 w-10 items-center justify-center rounded-full bg-[#00a8c6] hover:bg-[#00c2e0] text-slate-950 shadow-[0_0_15px_rgba(0,168,198,0.4)] transition-all duration-200 active:scale-95 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed font-bold"
-                  title="Enviar consulta médica (Enter)"
-                >
-                  <ArrowUp className="h-5 w-5 stroke-[3]" />
-                </button>
+                {input.trim() || attachments.length > 0 ? (
+                  <button
+                    type="submit"
+                    disabled={thinking || isGeneratingImage}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#00d3ee] hover:bg-[#3ce0f5] text-slate-950 shadow-[0_0_18px_rgba(0,211,238,0.45)] transition-all duration-200 active:scale-95 cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed font-bold"
+                    title="Enviar consulta médica (Enter)"
+                    aria-label="Enviar consulta"
+                  >
+                    <ArrowUp className="h-5 w-5 stroke-[3]" />
+                  </button>
+                ) : (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      const lastAiMessage = [...messages].reverse().find((m) => m.role === 'assistant');
+                      if (lastAiMessage) {
+                        speakAssistantMessage(lastAiMessage.content, lastAiMessage.id);
+                      } else {
+                        toggleVoice();
+                      }
+                    }}
+                    className="flex h-10 w-10 items-center justify-center rounded-full bg-[#00d3ee] hover:bg-[#3ce0f5] text-slate-950 shadow-[0_0_18px_rgba(0,211,238,0.45)] transition-all duration-200 active:scale-95 cursor-pointer font-bold"
+                    title="Escuchar / dictar"
+                    aria-label="Modo voz"
+                  >
+                    <AudioLines className="h-5 w-5 stroke-[2.5]" />
+                  </button>
+                )}
               </div>
             </div>
 
