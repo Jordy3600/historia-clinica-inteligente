@@ -1,5 +1,7 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import MarkdownMessage from '@/components/MarkdownMessage';
+import AiOrb from '@/components/AiOrb';
 import {
   Send,
   ArrowUp,
