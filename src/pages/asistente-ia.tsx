@@ -5,6 +5,7 @@ import AiOrb from '@/components/AiOrb';
 import {
   Send,
   ArrowUp,
+  ArrowLeft,
   AudioLines,
   Bot,
   User,
