@@ -1302,6 +1302,15 @@ RESUMEN ESTRUCTURADO:
         {/* Header Bar Minimalista (Exactamente como en la Imagen de Referencia) */}
         <div className="bg-bg px-5 py-4 z-10 flex items-center justify-between">
           <div className="flex items-center gap-3">
+            <button
+              type="button"
+              onClick={() => history.back()}
+              className="flex h-8 w-8 items-center justify-center rounded-full text-text-2 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
+              title="Volver"
+              aria-label="Volver"
+            >
+              <ArrowLeft className="h-4.5 w-4.5" />
+            </button>
             <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal/15 text-teal border border-teal/30">
               <Stethoscope className="h-5 w-5" />
             </div>
@@ -1313,6 +1322,7 @@ RESUMEN ESTRUCTURADO:
 
           {/* Right Header Buttons: (+) and (...) */}
           <div className="flex items-center gap-2">
+            <AiOrb size={22} className="mr-1" />
             <button
               type="button"
               onClick={handleCreateNewChat}
