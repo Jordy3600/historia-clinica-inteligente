@@ -1305,10 +1305,10 @@ RESUMEN ESTRUCTURADO:
           <div className="flex items-center gap-3">
             <button
               type="button"
-              onClick={() => history.back()}
+              onClick={() => navigate('/app')}
               className="flex h-8 w-8 items-center justify-center rounded-full text-text-2 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
-              title="Volver"
-              aria-label="Volver"
+              title="Volver a Inicio"
+              aria-label="Volver a Inicio"
             >
               <ArrowLeft className="h-4.5 w-4.5" />
             </button>
