@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useMemo } from 'react';
-import { useSearchParams } from 'react-router-dom';
+import { useSearchParams, useNavigate } from 'react-router-dom';
 import MarkdownMessage from '@/components/MarkdownMessage';
 import AiOrb from '@/components/AiOrb';
 import {
@@ -292,6 +292,7 @@ export default function AsistenteIAPage() {
   const { t, lang } = useI18n();
   const { user } = useAuth();
   const [searchParams] = useSearchParams();
+  const navigate = useNavigate();
 
   // Multi-chat state
   const [sessions, setSessions] = useState<ChatSession[]>(() => loadChatSessions());
@@ -1305,10 +1306,10 @@ RESUMEN ESTRUCTURADO:
           <div className="flex items-center gap-3">
             <button
               type="button"
-              onClick={() => history.back()}
+              onClick={() => navigate('/app')}
               className="flex h-8 w-8 items-center justify-center rounded-full text-text-2 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
-              title="Volver"
-              aria-label="Volver"
+              title="Volver a Inicio"
+              aria-label="Volver a Inicio"
             >
               <ArrowLeft className="h-4.5 w-4.5" />
             </button>

@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, Outlet } from 'react-router-dom';
+import { Link, useLocation, useNavigate, Outlet } from 'react-router-dom';
 import {
   LayoutDashboard,
   Bot,
@@ -12,6 +12,7 @@ import {
   Stethoscope,
   Menu,
   X,
+  ArrowLeft,
   Sparkles,
   ChevronUp,
   User,
@@ -29,6 +30,7 @@ import SettingsModal, { type SettingsTab } from '@/components/SettingsModal';
 
 export default function AppLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { userProfile, signOut } = useAuth();
 
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -74,6 +76,14 @@ export default function AppLayout() {
 
   const isActive = (to: string) =>
     to === '/app' ? location.pathname === '/app' : location.pathname.startsWith(to);
+
+  // Solo "Inicio" conserva el menú lateral; el resto de secciones se muestran
+  // a pantalla completa con una flecha de retroceso.
+  const isHome = location.pathname === '/app';
+  const currentNav = NAV_ITEMS.find(
+    (item) => !item.isSettings && item.to !== '/app' && location.pathname.startsWith(item.to)
+  );
+  const isAssistant = location.pathname.startsWith('/app/asistente');
 
   const SidebarContent = () => (
     <>
@@ -246,6 +256,39 @@ export default function AppLayout() {
   );
 
   return (
+    !isHome ? (
+      <div className="flex min-h-screen flex-col bg-bg text-text-1">
+        {!isAssistant && (
+          <header className="no-print sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-bg-card/80 px-4 backdrop-blur-md">
+            <button
+              type="button"
+              onClick={() => navigate('/app')}
+              className="flex h-9 w-9 items-center justify-center rounded-xl border border-border bg-bg-hover text-text-2 transition-all hover:border-teal/40 hover:text-teal cursor-pointer active:scale-95"
+              title="Volver a Inicio"
+              aria-label="Volver a Inicio"
+            >
+              <ArrowLeft className="h-4.5 w-4.5" />
+            </button>
+            <div className="flex items-center gap-2.5 min-w-0">
+              <div className="flex h-8 w-8 items-center justify-center rounded-xl border border-teal/30 bg-teal/15 text-teal">
+                {currentNav ? <currentNav.icon className="h-4 w-4" /> : <Stethoscope className="h-4 w-4" />}
+              </div>
+              <span className="truncate text-sm font-bold text-text-1">
+                {currentNav?.label ?? 'HistorIA'}
+              </span>
+            </div>
+          </header>
+        )}
+        <main className="flex-1 overflow-y-auto">
+          <Outlet />
+        </main>
+        <SettingsModal
+          isOpen={settingsModalOpen}
+          onClose={() => setSettingsModalOpen(false)}
+          defaultTab={selectedSettingsTab}
+        />
+      </div>
+    ) : (
     <div className="flex min-h-screen bg-bg text-text-1">
       {/* Sidebar Desktop */}
       <aside className="no-print hidden w-64 flex-shrink-0 flex-col border-r border-border bg-bg-card/95 backdrop-blur-md md:flex">
@@ -308,6 +351,7 @@ export default function AppLayout() {
         defaultTab={selectedSettingsTab}
       />
     </div>
+    )
   );
 }
 
