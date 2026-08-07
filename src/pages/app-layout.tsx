@@ -77,6 +77,14 @@ export default function AppLayout() {
   const isActive = (to: string) =>
     to === '/app' ? location.pathname === '/app' : location.pathname.startsWith(to);
 
+  // Solo "Inicio" conserva el menú lateral; el resto de secciones se muestran
+  // a pantalla completa con una flecha de retroceso.
+  const isHome = location.pathname === '/app';
+  const currentNav = NAV_ITEMS.find(
+    (item) => !item.isSettings && item.to !== '/app' && location.pathname.startsWith(item.to)
+  );
+  const isAssistant = location.pathname.startsWith('/app/asistente');
+
   const SidebarContent = () => (
     <>
       <div className="flex items-center px-5 py-5">
