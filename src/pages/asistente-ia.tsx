@@ -2026,27 +2026,24 @@ RESUMEN ESTRUCTURADO:
       {/* ========================================================= */}
       <aside
         className={cn(
-          'flex flex-col border-l border-border bg-bg-card/95 backdrop-blur-xl transition-all duration-300 ease-in-out z-20 flex-shrink-0',
-          sidebarOpen ? 'w-72 sm:w-80 opacity-100 shadow-2xl' : 'w-0 overflow-hidden border-l-0 opacity-0 pointer-events-none'
+          'flex flex-col border-l border-border/70 bg-[#080a0c] transition-all duration-300 ease-in-out z-20 flex-shrink-0',
+          sidebarOpen ? 'w-72 sm:w-80 opacity-100' : 'w-0 overflow-hidden border-l-0 opacity-0 pointer-events-none'
         )}
       >
-        {/* Header del Sidebar Derecho con Botón de Cierre y Nuevo Chat */}
-        <div className="p-4 border-b border-border/40 space-y-3">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2">
-              <Menu className="h-4 w-4 text-text-2" />
-              <span className="text-xs font-bold text-text-1">
-                Historial de chats
-              </span>
-            </div>
-
+        {/* Header del Sidebar Derecho */}
+        <div className="px-4 pt-4 pb-3 space-y-3">
+          <div className="flex items-center justify-between h-8">
+            <span className="text-[13.5px] font-semibold tracking-tight text-text-1">
+              Historial de chats
+            </span>
             <button
               type="button"
               onClick={() => setSidebarOpen(false)}
-              className="flex h-7 w-7 items-center justify-center rounded-lg text-text-3 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
-              title="Cerrar panel de historial"
+              className="flex h-8 w-8 items-center justify-center rounded-full text-text-2 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
+              title="Ocultar panel de historial"
+              aria-label="Ocultar panel de historial"
             >
-              <X className="h-4 w-4" />
+              <Menu className="h-4.5 w-4.5" />
             </button>
           </div>
 
@@ -2054,7 +2051,7 @@ RESUMEN ESTRUCTURADO:
           <button
             type="button"
             onClick={handleCreateNewChat}
-            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#00a8c6] hover:bg-[#00c2e0] py-2.5 px-4 text-xs font-bold text-slate-950 transition-all cursor-pointer shadow-xs active:scale-98"
+            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-teal/18 hover:bg-teal/28 border border-teal/25 py-3 px-4 text-[13px] font-semibold text-teal-2 transition-all cursor-pointer active:scale-[0.99]"
           >
             <Plus className="h-4 w-4 stroke-[2.5]" />
             <span>Nuevo Chat</span>
@@ -2062,19 +2059,19 @@ RESUMEN ESTRUCTURADO:
 
           {/* Buscador de conversaciones */}
           <div className="relative">
-            <Search className="absolute left-3 top-2.5 h-3.5 w-3.5 text-text-3" />
+            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-text-3" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar conversaciones..."
-              className="w-full rounded-xl border border-border bg-bg-hover pl-8 pr-3 py-1.5 text-xs text-text-1 placeholder:text-text-3 focus:border-blue/50 focus:outline-none focus:ring-1 focus:ring-blue/30"
+              className="w-full rounded-2xl border border-border bg-bg-card/60 pl-10 pr-8 py-2.5 text-[13px] text-text-1 placeholder:text-text-3 focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20"
             />
             {searchQuery && (
               <button
                 type="button"
                 onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-2 text-text-3 hover:text-text-1 cursor-pointer"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-text-3 hover:text-text-1 cursor-pointer"
               >
                 <X className="h-3.5 w-3.5" />
               </button>
@@ -2083,13 +2080,13 @@ RESUMEN ESTRUCTURADO:
         </div>
 
         {/* Lista Cronológica de Conversaciones */}
-        <div className="flex-1 overflow-y-auto p-3 space-y-4">
+        <div className="flex-1 overflow-y-auto px-4 pb-4 space-y-4">
           {/* Fijados */}
           {grouped.fijados.length > 0 && (
-            <div className="space-y-1">
-              <div className="flex items-center gap-1.5 px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-amber-400">
+            <div className="space-y-1.5">
+              <div className="flex items-center gap-1.5 px-1 py-1 text-[11px] font-medium text-text-3">
                 <Pin className="h-3 w-3" />
-                <span>Anclados ({grouped.fijados.length})</span>
+                <span>Anclados</span>
               </div>
               {grouped.fijados.map((s) => renderChatItem(s))}
             </div>
@@ -2097,8 +2094,8 @@ RESUMEN ESTRUCTURADO:
 
           {/* Hoy */}
           {grouped.hoy.length > 0 && (
-            <div className="space-y-1">
-              <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-text-3">
+            <div className="space-y-1.5">
+              <div className="px-1 py-1 text-[11px] font-medium text-text-3">
                 Hoy
               </div>
               {grouped.hoy.map((s) => renderChatItem(s))}
@@ -2107,8 +2104,8 @@ RESUMEN ESTRUCTURADO:
 
           {/* Ayer */}
           {grouped.ayer.length > 0 && (
-            <div className="space-y-1">
-              <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-text-3">
+            <div className="space-y-1.5">
+              <div className="px-1 py-1 text-[11px] font-medium text-text-3">
                 Ayer
               </div>
               {grouped.ayer.map((s) => renderChatItem(s))}
@@ -2117,9 +2114,9 @@ RESUMEN ESTRUCTURADO:
 
           {/* Últimos 7 Días */}
           {grouped.ultimos7Dias.length > 0 && (
-            <div className="space-y-1">
-              <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-text-3">
-                Últimos 7 Días
+            <div className="space-y-1.5">
+              <div className="px-1 py-1 text-[11px] font-medium text-text-3">
+                Últimos 7 días
               </div>
               {grouped.ultimos7Dias.map((s) => renderChatItem(s))}
             </div>
@@ -2127,8 +2124,8 @@ RESUMEN ESTRUCTURADO:
 
           {/* Anteriores */}
           {grouped.anteriores.length > 0 && (
-            <div className="space-y-1">
-              <div className="px-2 py-1 text-[10px] font-bold uppercase tracking-wider text-text-3">
+            <div className="space-y-1.5">
+              <div className="px-1 py-1 text-[11px] font-medium text-text-3">
                 Anteriores
               </div>
               {grouped.anteriores.map((s) => renderChatItem(s))}
