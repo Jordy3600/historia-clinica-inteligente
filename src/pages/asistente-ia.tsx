@@ -1303,7 +1303,7 @@ RESUMEN ESTRUCTURADO:
       <div className="flex flex-1 flex-col overflow-hidden min-w-0">
         {/* Header Bar Minimalista (Exactamente como en la Imagen de Referencia) */}
         <div className="bg-bg px-5 py-4 z-10 flex items-center justify-between">
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2.5">
             <button
               type="button"
               onClick={() => navigate('/app')}
@@ -1313,34 +1313,27 @@ RESUMEN ESTRUCTURADO:
             >
               <ArrowLeft className="h-4.5 w-4.5" />
             </button>
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl bg-teal/15 text-teal border border-teal/30">
-              <Stethoscope className="h-5 w-5" />
-            </div>
-            <div>
-              <h1 className="text-sm font-bold text-text-1">Asistente IA</h1>
-              <p className="text-xs text-text-3">IA médica inteligente</p>
+            <HeartPulse className="h-6 w-6 text-teal-2" strokeWidth={1.8} />
+            <div className="leading-tight">
+              <h1 className="text-[15px] font-semibold tracking-tight text-text-1">Asistente IA</h1>
+              <p className="text-[11px] text-text-3">IA médica inteligente</p>
             </div>
           </div>
 
-          {/* Right Header Buttons: (+) and (...) */}
-          <div className="flex items-center gap-2">
-            <AiOrb size={22} className="mr-1" />
-            <button
-              type="button"
-              onClick={handleCreateNewChat}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-[#182030] text-text-2 hover:bg-[#202b40] hover:text-text-1 transition-all cursor-pointer"
-              title="Nuevo chat"
-            >
-              <Plus className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              onClick={() => setSidebarOpen((prev) => !prev)}
-              className="flex h-8 w-8 items-center justify-center rounded-full bg-[#182030] text-text-2 hover:bg-[#202b40] hover:text-text-1 transition-all cursor-pointer"
-              title="Opciones de chat / Historial"
-            >
-              <MoreVertical className="h-4 w-4" />
-            </button>
+          {/* Derecha: únicamente el orb (y acceso al historial si está oculto) */}
+          <div className="flex items-center gap-3">
+            {!sidebarOpen && (
+              <button
+                type="button"
+                onClick={() => setSidebarOpen(true)}
+                className="flex h-8 w-8 items-center justify-center rounded-full text-text-3 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
+                title="Mostrar historial de chats"
+                aria-label="Mostrar historial de chats"
+              >
+                <Menu className="h-4.5 w-4.5" />
+              </button>
+            )}
+            <AiOrb size={26} />
           </div>
         </div>
 
