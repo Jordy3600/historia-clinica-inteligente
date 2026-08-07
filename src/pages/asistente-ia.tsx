@@ -1206,14 +1206,14 @@ RESUMEN ESTRUCTURADO:
         key={s.id}
         onClick={() => handleSelectSession(s.id)}
         className={cn(
-          'group relative flex items-center justify-between rounded-xl p-2.5 text-xs transition-all cursor-pointer border',
+          'group relative flex items-center justify-between rounded-2xl px-3 py-2.5 text-xs transition-all cursor-pointer border',
           isActive
-            ? 'border-[#00a8c6] bg-[#0b2230] font-bold text-[#00f2fe] shadow-sm'
-            : 'border-transparent text-text-2 hover:bg-bg-hover hover:text-text-1'
+            ? 'border-teal/40 bg-teal/12 text-teal-2'
+            : 'border-border/60 bg-bg-card/40 text-text-2 hover:bg-bg-hover hover:text-text-1'
         )}
       >
         <div className="min-w-0 flex-1 pr-2 flex items-center gap-2">
-          <MessageSquare className={cn("h-4 w-4 flex-shrink-0", isActive ? "text-[#00f2fe]" : "text-text-3")} />
+          <MessageSquare className={cn("h-4 w-4 flex-shrink-0", isActive ? "text-teal-2" : "text-text-3")} />
           <div className="min-w-0 flex-1">
             {isRenaming ? (
               <div className="flex items-center gap-1" onClick={(e) => e.stopPropagation()}>
@@ -1235,8 +1235,8 @@ RESUMEN ESTRUCTURADO:
             ) : (
               <>
                 <div className="flex items-center gap-1.5 truncate">
-                  {s.pinned && <Pin className="h-3 w-3 flex-shrink-0 text-amber-400 fill-amber-400" />}
-                  <span className="truncate text-xs font-semibold">{s.title}</span>
+                  {s.pinned && <Pin className="h-3 w-3 flex-shrink-0 text-text-3" />}
+                  <span className="truncate text-[13px] font-medium">{s.title}</span>
                 </div>
                 {s.patientName && (
                   <div className="mt-0.5 truncate text-[10px] text-teal font-medium">
