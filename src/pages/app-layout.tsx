@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation, Outlet } from 'react-router-dom';
+import { Link, useLocation, useNavigate, Outlet } from 'react-router-dom';
 import {
   LayoutDashboard,
   Bot,
@@ -12,6 +12,7 @@ import {
   Stethoscope,
   Menu,
   X,
+  ArrowLeft,
   Sparkles,
   ChevronUp,
   User,
@@ -29,6 +30,7 @@ import SettingsModal, { type SettingsTab } from '@/components/SettingsModal';
 
 export default function AppLayout() {
   const location = useLocation();
+  const navigate = useNavigate();
   const { userProfile, signOut } = useAuth();
 
   const [mobileOpen, setMobileOpen] = useState(false);
