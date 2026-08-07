@@ -7,6 +7,7 @@ import {
   ArrowUp,
   ArrowLeft,
   AudioLines,
+  HeartPulse,
   Bot,
   User,
   AlertTriangle,
