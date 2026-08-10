@@ -203,7 +203,7 @@ export default function MapaClinicasPage() {
   }
 
   return (
-    <div className="relative h-[calc(100vh-3.5rem)] min-h-[520px] w-full overflow-hidden bg-[#050a0d]">
+    <div className="relative h-screen min-h-[520px] w-full overflow-hidden bg-[#050a0d]">
       {/* Mapa */}
       <div ref={containerRef} className="absolute inset-0 z-0 [&_.leaflet-container]:bg-[#050a0d]" />
 
