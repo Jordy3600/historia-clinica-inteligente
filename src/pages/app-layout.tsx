@@ -84,6 +84,7 @@ export default function AppLayout() {
     (item) => !item.isSettings && item.to !== '/app' && location.pathname.startsWith(item.to)
   );
   const isAssistant = location.pathname.startsWith('/app/asistente');
+  const isFullBleed = isAssistant || location.pathname.startsWith('/app/mapa');
 
   const SidebarContent = () => (
     <>
@@ -258,7 +259,7 @@ export default function AppLayout() {
   return (
     !isHome ? (
       <div className="flex min-h-screen flex-col bg-bg text-text-1">
-        {!isAssistant && (
+        {!isFullBleed && (
           <header className="no-print sticky top-0 z-30 flex h-14 items-center gap-3 border-b border-border bg-bg-card/80 px-4 backdrop-blur-md">
             <button
               type="button"
