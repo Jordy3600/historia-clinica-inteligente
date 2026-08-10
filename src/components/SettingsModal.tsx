@@ -262,6 +262,10 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
 
         {/* Modal Right Main Content Area */}
         <div className="flex-1 overflow-y-auto p-6">
+          <AiOrb
+            size={40}
+            className="pointer-events-none absolute right-16 top-5 drop-shadow-[0_0_20px_rgba(45,212,191,0.55)]"
+          />
           {/* TAB 1: PERFIL Y CUENTA */}
           {activeTab === 'profile' && (
             <div className="space-y-6 animate-fade-in">
