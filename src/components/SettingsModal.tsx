@@ -24,6 +24,7 @@ import { toast } from 'sonner';
 import { useAuth } from '@/lib/auth';
 import { useTheme } from '@/lib/theme';
 import { useI18n, LANGUAGES, type Lang } from '@/lib/i18n';
+import AiOrb from '@/components/AiOrb';
 import { cn } from '@/lib/utils';
 
 export type SettingsTab =
@@ -134,7 +135,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
       />
 
       {/* Modal Dialog Container */}
-      <div className="relative z-10 flex h-[90vh] max-h-[700px] w-full max-w-4xl flex-col overflow-hidden rounded-3xl border border-border bg-bg-card shadow-2xl animate-fade-in md:flex-row">
+      <div className="glass-panel relative z-10 flex h-[90vh] max-h-[700px] w-full max-w-4xl flex-col overflow-hidden animate-fade-in md:flex-row">
         {/* Modal Close Button */}
         <button
           onClick={onClose}
@@ -262,6 +263,10 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
 
         {/* Modal Right Main Content Area */}
         <div className="flex-1 overflow-y-auto p-6">
+          <AiOrb
+            size={40}
+            className="pointer-events-none absolute right-16 top-5 drop-shadow-[0_0_20px_rgba(45,212,191,0.55)]"
+          />
           {/* TAB 1: PERFIL Y CUENTA */}
           {activeTab === 'profile' && (
             <div className="space-y-6 animate-fade-in">
@@ -273,7 +278,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
               </div>
 
               {/* Avatar Picker */}
-              <div className="rounded-2xl border border-border bg-bg-hover/40 p-4 space-y-4">
+              <div className="rounded-2xl border border-teal/15 bg-white/[0.03] backdrop-blur-xl p-4 space-y-4">
                 <div className="flex items-center gap-4">
                   <div className="relative">
                     <img
@@ -317,7 +322,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
                     placeholder="URL personalizada de foto (https://...)"
                     value={customAvatarUrl}
                     onChange={(e) => setCustomAvatarUrl(e.target.value)}
-                    className="w-full rounded-xl border border-border bg-bg-card px-3.5 py-2 text-xs text-text-1 placeholder:text-text-3 focus:border-blue focus:outline-none"
+                    className="w-full rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3.5 py-2 text-xs text-text-1 placeholder:text-text-3 focus:border-teal focus:outline-none"
                   />
                 </div>
               </div>
@@ -334,7 +339,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
                       required
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
-                      className="w-full rounded-xl border border-border bg-bg-card px-3.5 py-2 text-xs text-text-1 focus:border-blue focus:outline-none"
+                      className="w-full rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3.5 py-2 text-xs text-text-1 focus:border-teal focus:outline-none"
                     />
                   </div>
 
@@ -358,7 +363,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
                       type="text"
                       value={cmp}
                       onChange={(e) => setCmp(e.target.value)}
-                      className="w-full rounded-xl border border-border bg-bg-card px-3.5 py-2 text-xs text-text-1 focus:border-blue focus:outline-none"
+                      className="w-full rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3.5 py-2 text-xs text-text-1 focus:border-teal focus:outline-none"
                     />
                   </div>
 
@@ -370,7 +375,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
                       type="text"
                       value={specialty}
                       onChange={(e) => setSpecialty(e.target.value)}
-                      className="w-full rounded-xl border border-border bg-bg-card px-3.5 py-2 text-xs text-text-1 focus:border-blue focus:outline-none"
+                      className="w-full rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3.5 py-2 text-xs text-text-1 focus:border-teal focus:outline-none"
                     />
                   </div>
 
@@ -382,7 +387,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
                       type="text"
                       value={clinicName}
                       onChange={(e) => setClinicName(e.target.value)}
-                      className="w-full rounded-xl border border-border bg-bg-card px-3.5 py-2 text-xs text-text-1 focus:border-blue focus:outline-none"
+                      className="w-full rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3.5 py-2 text-xs text-text-1 focus:border-teal focus:outline-none"
                     />
                   </div>
 
@@ -394,7 +399,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
                       type="text"
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
-                      className="w-full rounded-xl border border-border bg-bg-card px-3.5 py-2 text-xs text-text-1 focus:border-blue focus:outline-none"
+                      className="w-full rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3.5 py-2 text-xs text-text-1 focus:border-teal focus:outline-none"
                     />
                   </div>
                 </div>
@@ -423,7 +428,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
               </div>
 
               {/* Theme Toggle Cards */}
-              <div className="rounded-2xl border border-border bg-bg-hover/40 p-5 space-y-3">
+              <div className="rounded-2xl border border-teal/15 bg-white/[0.03] backdrop-blur-xl p-5 space-y-3">
                 <span className="text-xs font-bold text-text-1">Tema de la aplicación</span>
                 <div className="grid grid-cols-2 gap-3">
                   <button
@@ -473,14 +478,14 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
               </div>
 
               {/* Language Selector */}
-              <div className="rounded-2xl border border-border bg-bg-hover/40 p-5 space-y-3">
+              <div className="rounded-2xl border border-teal/15 bg-white/[0.03] backdrop-blur-xl p-5 space-y-3">
                 <span className="text-xs font-bold text-text-1">Idioma del sistema</span>
                 <div className="flex items-center gap-3">
                   <Globe className="h-5 w-5 text-blue" />
                   <select
                     value={lang}
                     onChange={(e) => setLang(e.target.value as Lang)}
-                    className="flex-1 rounded-xl border border-border bg-bg-card px-4 py-2.5 text-xs font-semibold text-text-1 outline-none cursor-pointer focus:border-blue"
+                    className="flex-1 rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-4 py-2.5 text-xs font-semibold text-text-1 outline-none cursor-pointer focus:border-teal"
                   >
                     {LANGUAGES.map((l) => (
                       <option key={l.code} value={l.code} className="bg-bg-card">
@@ -517,13 +522,13 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
 
               {/* Consumption / Usage */}
               <div className="grid grid-cols-2 gap-3">
-                <div className="rounded-2xl border border-border bg-bg-hover/40 p-4">
+                <div className="rounded-2xl border border-teal/15 bg-white/[0.03] backdrop-blur-xl p-4">
                   <div className="text-[11px] font-semibold text-text-2">Consultas IA este mes</div>
                   <div className="mt-1 text-xl font-extrabold text-teal">Ilimitadas</div>
                   <div className="mt-1 text-[10px] text-text-3">Motor IA médica activo</div>
                 </div>
 
-                <div className="rounded-2xl border border-border bg-bg-hover/40 p-4">
+                <div className="rounded-2xl border border-teal/15 bg-white/[0.03] backdrop-blur-xl p-4">
                   <div className="text-[11px] font-semibold text-text-2">Historias Clínicas</div>
                   <div className="mt-1 text-xl font-extrabold text-blue">Encriptadas HIPAA</div>
                   <div className="mt-1 text-[10px] text-text-3">Respaldadas en la nube 24/7</div>
@@ -618,7 +623,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
               </div>
 
               {/* Voice Read Aloud Toggle */}
-              <div className="rounded-2xl border border-border bg-bg-hover/40 p-4 space-y-3">
+              <div className="rounded-2xl border border-teal/15 bg-white/[0.03] backdrop-blur-xl p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-3">
                     <Volume2 className="h-5 w-5 text-teal" />
@@ -680,7 +685,7 @@ export default function SettingsModal({ isOpen, onClose, defaultTab = 'profile' 
               </div>
 
               {/* Auto Context Toggle */}
-              <div className="rounded-2xl border border-border bg-bg-hover/40 p-4 flex items-center justify-between">
+              <div className="rounded-2xl border border-teal/15 bg-white/[0.03] backdrop-blur-xl p-4 flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <Sparkles className="h-5 w-5 text-blue" />
                   <div>

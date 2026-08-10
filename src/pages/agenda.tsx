@@ -252,7 +252,7 @@ export default function AgendaPage() {
                     id="r-type"
                     value={type}
                     onChange={(e) => setType(e.target.value)}
-                    className="w-full rounded-xl border border-border bg-bg-hover px-3 py-2.5 text-sm text-text-1 focus:border-blue/50 focus:outline-none cursor-pointer"
+                    className="w-full rounded-xl border border-border bg-bg-hover px-3 py-2.5 text-sm text-text-1 focus:border-teal/50 focus:outline-none cursor-pointer"
                   >
                     {Object.entries(TYPE_LABELS).map(([value, label]) => (
                       <option key={value} value={value} className="bg-bg-card">

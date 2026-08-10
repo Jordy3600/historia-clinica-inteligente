@@ -35,7 +35,7 @@ export default function ReportesPage() {
         <div className="flex items-center gap-2">
           <button
             onClick={() => handleExport('PDF')}
-            className="flex items-center gap-2 rounded-xl border border-border bg-bg-card px-3.5 py-2 text-xs font-bold text-text-1 hover:border-teal/50 hover:bg-bg-hover transition-all cursor-pointer"
+            className="flex items-center gap-2 rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3.5 py-2 text-xs font-bold text-text-1 hover:border-teal/50 hover:bg-bg-hover transition-all cursor-pointer"
           >
             <Download className="h-4 w-4 text-teal" />
             <span>Exportar PDF</span>

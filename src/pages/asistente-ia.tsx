@@ -1263,7 +1263,7 @@ RESUMEN ESTRUCTURADO:
 
           {/* Dropdown Options Menu */}
           {isMenuOpen && (
-            <div className="absolute right-0 top-7 z-50 w-44 rounded-xl border border-border bg-bg-card p-1.5 shadow-2xl space-y-1">
+            <div className="absolute right-0 top-7 z-50 w-44 rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl p-1.5 shadow-2xl space-y-1">
               <button
                 onClick={(e) => handleTogglePin(s.id, e)}
                 className="flex w-full items-center gap-2 rounded-lg px-2.5 py-1.5 text-left text-xs font-medium text-text-2 hover:bg-bg-hover hover:text-text-1"
@@ -1413,7 +1413,7 @@ RESUMEN ESTRUCTURADO:
                       {msg.attachments.map((att) => (
                         <div
                           key={att.id}
-                          className="flex items-center gap-2 rounded-xl border border-border bg-bg-card px-3 py-1.5"
+                          className="flex items-center gap-2 rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3 py-1.5"
                         >
                           {att.type.startsWith('image/') ? (
                             <ImageIcon className="h-3.5 w-3.5 text-teal" />
@@ -1601,7 +1601,7 @@ RESUMEN ESTRUCTURADO:
                 <div className="flex h-8 w-8 flex-shrink-0 items-center justify-center rounded-lg bg-teal/10">
                   <Bot className="h-4 w-4 text-teal" />
                 </div>
-                <div className="flex items-center gap-2 rounded-2xl border border-border bg-bg-card px-4 py-3 shadow-xs">
+                <div className="flex items-center gap-2 rounded-2xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-4 py-3 shadow-xs">
                   <span className="text-xs text-text-2 font-medium">
                     {isGeneratingImage
                       ? 'HistorIA IA generando ilustración clínica...'
@@ -1786,7 +1786,7 @@ RESUMEN ESTRUCTURADO:
                 {attachments.map((att) => (
                   <div
                     key={att.id}
-                    className="flex items-center gap-2 rounded-full border border-border bg-bg-card px-3 py-1 shadow-xs"
+                    className="flex items-center gap-2 rounded-full border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3 py-1 shadow-xs"
                   >
                     {att.type.startsWith('image/') ? (
                       <ImageIcon className="h-3.5 w-3.5 text-teal" />
@@ -2065,7 +2065,7 @@ RESUMEN ESTRUCTURADO:
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Buscar conversaciones..."
-              className="w-full rounded-2xl border border-border bg-bg-card/60 pl-10 pr-8 py-2.5 text-[13px] text-text-1 placeholder:text-text-3 focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20"
+              className="w-full rounded-2xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl/60 pl-10 pr-8 py-2.5 text-[13px] text-text-1 placeholder:text-text-3 focus:border-teal/40 focus:outline-none focus:ring-1 focus:ring-teal/20"
             />
             {searchQuery && (
               <button
