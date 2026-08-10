@@ -484,7 +484,7 @@ export default function MapaClinicasPage() {
               setIsPickingPoint(false);
               setShowModal(true);
             }}
-            className="rounded-lg border border-border bg-bg-card px-3 py-1 text-xs font-medium text-text-2 hover:text-text-1"
+            className="rounded-lg border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3 py-1 text-xs font-medium text-text-2 hover:text-text-1"
           >
             Cancelar
           </button>
@@ -500,13 +500,13 @@ export default function MapaClinicasPage() {
             placeholder="Buscar por nombre, especialidad, dirección, ciudad o país…"
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full rounded-xl border border-border bg-bg-card py-2.5 pl-10 pr-4 text-sm text-text-1 placeholder:text-text-3 focus:border-blue/50 focus:outline-none focus:ring-2 focus:ring-blue/20"
+            className="w-full rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl py-2.5 pl-10 pr-4 text-sm text-text-1 placeholder:text-text-3 focus:border-teal/50 focus:outline-none focus:ring-2 focus:ring-blue/20"
           />
         </div>
         <select
           value={specialty}
           onChange={(e) => setSpecialty(e.target.value)}
-          className="rounded-xl border border-border bg-bg-card px-3 py-2.5 text-sm text-text-1 focus:border-blue/50 focus:outline-none cursor-pointer"
+          className="rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3 py-2.5 text-sm text-text-1 focus:border-teal/50 focus:outline-none cursor-pointer"
         >
           {SPECIALTIES.map((s) => (
             <option key={s} value={s} className="bg-bg-card">
@@ -609,7 +609,7 @@ export default function MapaClinicasPage() {
       {/* Registration Modal */}
       {showModal && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-4 backdrop-blur-xs animate-fade-in">
-          <div className="w-full max-w-lg rounded-2xl border border-border bg-bg-card p-6 shadow-2xl space-y-4">
+          <div className="w-full max-w-lg rounded-2xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl p-6 shadow-2xl space-y-4">
             <div className="flex items-center justify-between border-b border-border pb-3">
               <div className="flex items-center gap-2">
                 <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-blue/15 text-blue">
@@ -637,7 +637,7 @@ export default function MapaClinicasPage() {
                   placeholder="Ej. Clínica San Lucas, Hospital General, etc."
                   value={formName}
                   onChange={(e) => setFormName(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-bg-hover px-3.5 py-2 text-sm text-text-1 placeholder:text-text-3 focus:border-blue focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-bg-hover px-3.5 py-2 text-sm text-text-1 placeholder:text-text-3 focus:border-teal focus:outline-none"
                 />
               </div>
 
@@ -647,7 +647,7 @@ export default function MapaClinicasPage() {
                   <select
                     value={formType}
                     onChange={(e) => setFormType(e.target.value as Clinic['type'])}
-                    className="w-full rounded-xl border border-border bg-bg-hover px-3 py-2 text-sm text-text-1 focus:border-blue focus:outline-none cursor-pointer"
+                    className="w-full rounded-xl border border-border bg-bg-hover px-3 py-2 text-sm text-text-1 focus:border-teal focus:outline-none cursor-pointer"
                   >
                     <option value="clinica">Clínica</option>
                     <option value="hospital">Hospital</option>
@@ -664,7 +664,7 @@ export default function MapaClinicasPage() {
                     placeholder="Ej. General, Cardiología, etc."
                     value={formSpecialty}
                     onChange={(e) => setFormSpecialty(e.target.value)}
-                    className="w-full rounded-xl border border-border bg-bg-hover px-3.5 py-2 text-sm text-text-1 placeholder:text-text-3 focus:border-blue focus:outline-none"
+                    className="w-full rounded-xl border border-border bg-bg-hover px-3.5 py-2 text-sm text-text-1 placeholder:text-text-3 focus:border-teal focus:outline-none"
                   />
                 </div>
               </div>
@@ -679,7 +679,7 @@ export default function MapaClinicasPage() {
                   placeholder="Ej. Av. Javier Prado 1230, Lima, Perú"
                   value={formAddress}
                   onChange={(e) => setFormAddress(e.target.value)}
-                  className="w-full rounded-xl border border-border bg-bg-hover px-3.5 py-2 text-sm text-text-1 placeholder:text-text-3 focus:border-blue focus:outline-none"
+                  className="w-full rounded-xl border border-border bg-bg-hover px-3.5 py-2 text-sm text-text-1 placeholder:text-text-3 focus:border-teal focus:outline-none"
                 />
               </div>
 
@@ -691,7 +691,7 @@ export default function MapaClinicasPage() {
                     placeholder="+51 987 654 321"
                     value={formPhone}
                     onChange={(e) => setFormPhone(e.target.value)}
-                    className="w-full rounded-xl border border-border bg-bg-hover px-3.5 py-2 text-sm text-text-1 placeholder:text-text-3 focus:border-blue focus:outline-none"
+                    className="w-full rounded-xl border border-border bg-bg-hover px-3.5 py-2 text-sm text-text-1 placeholder:text-text-3 focus:border-teal focus:outline-none"
                   />
                 </div>
 
@@ -704,7 +704,7 @@ export default function MapaClinicasPage() {
                     max="5"
                     value={formRating}
                     onChange={(e) => setFormRating(e.target.value)}
-                    className="w-full rounded-xl border border-border bg-bg-hover px-3.5 py-2 text-sm text-text-1 focus:border-blue focus:outline-none"
+                    className="w-full rounded-xl border border-border bg-bg-hover px-3.5 py-2 text-sm text-text-1 focus:border-teal focus:outline-none"
                   />
                 </div>
               </div>
@@ -724,7 +724,7 @@ export default function MapaClinicasPage() {
                   <button
                     type="button"
                     onClick={handleUseMyLocation}
-                    className="flex items-center gap-1.5 rounded-lg border border-border bg-bg-card px-2.5 py-1.5 text-xs font-medium text-text-2 hover:border-blue/40 hover:text-text-1 cursor-pointer"
+                    className="flex items-center gap-1.5 rounded-lg border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-2.5 py-1.5 text-xs font-medium text-text-2 hover:border-blue/40 hover:text-text-1 cursor-pointer"
                   >
                     <Navigation className="h-3.5 w-3.5 text-blue" /> Usar mi ubicación GPS
                   </button>
@@ -732,7 +732,7 @@ export default function MapaClinicasPage() {
                   <button
                     type="button"
                     onClick={handleStartPickingPoint}
-                    className="flex items-center gap-1.5 rounded-lg border border-border bg-bg-card px-2.5 py-1.5 text-xs font-medium text-text-2 hover:border-blue/40 hover:text-text-1 cursor-pointer"
+                    className="flex items-center gap-1.5 rounded-lg border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-2.5 py-1.5 text-xs font-medium text-text-2 hover:border-blue/40 hover:text-text-1 cursor-pointer"
                   >
                     <MapPin className="h-3.5 w-3.5 text-teal" /> Seleccionar en el mapa
                   </button>
@@ -748,7 +748,7 @@ export default function MapaClinicasPage() {
                       placeholder="-12.0734"
                       value={formLat}
                       onChange={(e) => setFormLat(e.target.value)}
-                      className="w-full rounded-lg border border-border bg-bg-card px-2.5 py-1 text-xs text-text-1 focus:outline-none"
+                      className="w-full rounded-lg border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-2.5 py-1 text-xs text-text-1 focus:outline-none"
                     />
                   </div>
                   <div>
@@ -760,7 +760,7 @@ export default function MapaClinicasPage() {
                       placeholder="-77.0396"
                       value={formLng}
                       onChange={(e) => setFormLng(e.target.value)}
-                      className="w-full rounded-lg border border-border bg-bg-card px-2.5 py-1 text-xs text-text-1 focus:outline-none"
+                      className="w-full rounded-lg border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-2.5 py-1 text-xs text-text-1 focus:outline-none"
                     />
                   </div>
                 </div>

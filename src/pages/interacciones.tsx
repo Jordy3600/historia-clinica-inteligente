@@ -22,7 +22,7 @@ export default function InteraccionesPage() {
   return (
     <div className="mx-auto max-w-5xl space-y-6 p-6 lg:p-8">
       <div className="animate-fade-in"><h1 className="text-2xl font-bold tracking-tight text-text-1">Interacciones</h1><p className="mt-1 text-sm text-text-2">Verificador de interacciones entre medicamentos con nivel de severidad.</p></div>
-      <div className="relative animate-slide-up"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-3" /><input type="text" placeholder="Buscar por nombre del medicamento…" value={search} onChange={e => setSearch(e.target.value)} className="w-full rounded-xl border border-border bg-bg-card py-2.5 pl-10 pr-4 text-sm text-text-1 placeholder:text-text-3 focus:border-blue/50 focus:outline-none focus:ring-2 focus:ring-blue/20" /></div>
+      <div className="relative animate-slide-up"><Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-text-3" /><input type="text" placeholder="Buscar por nombre del medicamento…" value={search} onChange={e => setSearch(e.target.value)} className="w-full rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl py-2.5 pl-10 pr-4 text-sm text-text-1 placeholder:text-text-3 focus:border-teal/50 focus:outline-none focus:ring-2 focus:ring-blue/20" /></div>
       <div className="grid gap-3">{filtered.map((int, i) => { const cfg = SEV_CFG[int.severity]; return (
         <Card key={`${int.drugA}-${int.drugB}`} className={cn('animate-slide-up border', cfg.border)} style={{ animationDelay: `${i * 50}ms` }}>
           <CardContent className="p-4">

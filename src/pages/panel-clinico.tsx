@@ -153,7 +153,7 @@ export default function PanelClinicoPage() {
 
             {/* Dropdown Resultados de Búsqueda */}
             {showSearchResults && searchQuery.trim().length > 0 && (
-              <div className="absolute left-0 right-0 top-12 z-50 rounded-2xl border border-border bg-bg-card p-2 shadow-2xl space-y-1">
+              <div className="absolute left-0 right-0 top-12 z-50 rounded-2xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl p-2 shadow-2xl space-y-1">
                 <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text-3 border-b border-border/50">
                   Pacientes Encontrados ({filteredPatients.length})
                 </div>
@@ -226,7 +226,7 @@ export default function PanelClinicoPage() {
           {/* ========================================================= */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
             {/* Métrica 1: Pacientes Atendidos Hoy */}
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-bg-card p-5 shadow-sm transition-all hover:border-blue/50">
+            <div className="relative overflow-hidden rounded-2xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl p-5 shadow-sm transition-all hover:border-blue/50">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-extrabold uppercase tracking-wider text-text-2">
                   Pacientes atendidos hoy
@@ -246,7 +246,7 @@ export default function PanelClinicoPage() {
             </div>
 
             {/* Métrica 2: Historias Procesadas por IA */}
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-bg-card p-5 shadow-sm transition-all hover:border-teal/50">
+            <div className="relative overflow-hidden rounded-2xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl p-5 shadow-sm transition-all hover:border-teal/50">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-extrabold uppercase tracking-wider text-text-2">
                   Historias procesadas por IA
@@ -266,7 +266,7 @@ export default function PanelClinicoPage() {
             </div>
 
             {/* Métrica 3: Alertas Médicas Pendientes */}
-            <div className="relative overflow-hidden rounded-2xl border border-border bg-bg-card p-5 shadow-sm transition-all hover:border-amber-500/50">
+            <div className="relative overflow-hidden rounded-2xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl p-5 shadow-sm transition-all hover:border-amber-500/50">
               <div className="flex items-center justify-between">
                 <span className="text-xs font-extrabold uppercase tracking-wider text-text-2">
                   Alertas médicas pendientes
@@ -289,7 +289,7 @@ export default function PanelClinicoPage() {
           {/* ========================================================= */}
           {/* EDITOR DE NOTA MÉDICA INTERACTIVO                          */}
           {/* ========================================================= */}
-          <div className="rounded-3xl border border-border bg-bg-card p-5 sm:p-6 shadow-xl space-y-4">
+          <div className="rounded-3xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl p-5 sm:p-6 shadow-xl space-y-4">
             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-border/70 pb-4 gap-3">
               <div>
                 <div className="flex items-center gap-2">
@@ -390,7 +390,7 @@ export default function PanelClinicoPage() {
                     <button
                       type="button"
                       onClick={handleCopyResult}
-                      className="flex items-center gap-1.5 rounded-xl border border-border bg-bg-card px-3 py-1.5 text-xs font-bold text-text-1 hover:border-blue cursor-pointer transition-colors"
+                      className="flex items-center gap-1.5 rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3 py-1.5 text-xs font-bold text-text-1 hover:border-blue cursor-pointer transition-colors"
                     >
                       {copied ? <Check className="h-3.5 w-3.5 text-teal" /> : <Copy className="h-3.5 w-3.5 text-blue" />}
                       <span>{copied ? 'Copiado' : 'Copiar Resumen'}</span>

@@ -333,7 +333,7 @@ export default function PacientesPage() {
       {isModalOpen && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <div className="fixed inset-0 bg-black/80 backdrop-blur-xs" onClick={() => setIsModalOpen(false)} />
-          <div className="relative z-10 w-full max-w-md rounded-3xl border border-border bg-bg-card p-6 shadow-2xl animate-fade-in space-y-4">
+          <div className="relative z-10 w-full max-w-md rounded-3xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl p-6 shadow-2xl animate-fade-in space-y-4">
             <div className="flex items-center justify-between border-b border-border/60 pb-3">
               <h3 className="text-base font-extrabold text-text-1">Registrar Nuevo Paciente</h3>
               <button onClick={() => setIsModalOpen(false)} className="rounded-xl p-1 text-text-3 hover:text-text-1">

@@ -24,7 +24,7 @@ export default function LandingPage() {
 
       <main className="mx-auto max-w-6xl px-6 py-20">
         <section className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 rounded-full border border-border bg-bg-card px-3 py-1 text-xs text-text-2 animate-fade-in">
+          <div className="inline-flex items-center gap-2 rounded-full border border-teal/12 bg-bg-card/60 backdrop-blur-xl px-3 py-1 text-xs text-text-2 animate-fade-in">
             <Sparkles className="h-3.5 w-3.5 text-blue" />
             Resúmenes clínicos asistidos por IA
           </div>
@@ -58,7 +58,7 @@ export default function LandingPage() {
           ].map(({ icon: Icon, title, body, color }, i) => (
             <div
               key={title}
-              className="rounded-2xl border border-border bg-bg-card p-6 shadow-card transition-all duration-300 hover:border-blue/30 hover:shadow-card-hover animate-slide-up"
+              className="rounded-2xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl p-6 shadow-card transition-all duration-300 hover:border-blue/30 hover:shadow-card-hover animate-slide-up"
               style={{ animationDelay: `${300 + i * 100}ms` }}
             >
               <Icon className={`h-5 w-5 ${color}`} />

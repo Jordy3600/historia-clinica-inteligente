@@ -69,7 +69,7 @@ export default function ResultadoPage() {
         <h1 className="text-2xl font-bold tracking-tight text-text-1">{t('resultado.titulo')}</h1>
         <p className="mt-1 text-sm text-text-2">Resumen clínico generado por IA a partir del historial del paciente.</p>
       </div>
-      <div className="flex flex-wrap items-center gap-4 rounded-xl border border-border bg-bg-card p-4 animate-slide-up">
+      <div className="flex flex-wrap items-center gap-4 rounded-xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl p-4 animate-slide-up">
         <div className="flex items-center gap-2 text-sm"><User className="h-4 w-4 text-text-2" /><span className="font-semibold text-text-1">{patientName}</span>{patientCode && patientCode !== patientName && <span className="text-text-2">· {patientCode}</span>}</div>
         <div className="flex items-center gap-2 text-sm text-text-2"><Calendar className="h-4 w-4" />{new Date(createdAt).toLocaleString('es-PE', { day: '2-digit', month: 'long', year: 'numeric' })}</div>
         {isSaved && <span className="ml-auto inline-flex items-center gap-1.5 rounded-lg bg-success/10 px-2.5 py-1 text-xs font-medium text-success"><Save className="h-3 w-3" />Guardado</span>}

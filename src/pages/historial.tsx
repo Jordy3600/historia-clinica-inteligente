@@ -91,7 +91,7 @@ export default function HistorialPage() {
           placeholder={t('historial.buscar')}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full rounded-2xl border border-border bg-bg-card py-2.5 pl-10 pr-4 text-sm text-text-1 placeholder:text-text-3 focus:border-teal/60 focus:outline-none focus:ring-2 focus:ring-teal/20 transition-all"
+          className="w-full rounded-2xl border border-teal/12 bg-bg-card/60 backdrop-blur-xl py-2.5 pl-10 pr-4 text-sm text-text-1 placeholder:text-text-3 focus:border-teal/60 focus:outline-none focus:ring-2 focus:ring-teal/20 transition-all"
         />
       </div>
 
