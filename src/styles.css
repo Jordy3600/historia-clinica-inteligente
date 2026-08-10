@@ -114,6 +114,11 @@
     margin: 0;
     min-height: 100vh;
     background-color: var(--color-bg);
+    background-image:
+      radial-gradient(1100px 700px at 12% -5%, rgba(20, 184, 166, 0.16), transparent 60%),
+      radial-gradient(900px 600px at 95% 10%, rgba(34, 211, 238, 0.12), transparent 60%),
+      radial-gradient(1000px 800px at 50% 110%, rgba(13, 148, 136, 0.12), transparent 60%);
+    background-attachment: fixed;
     transition:
       background-color 0.2s ease,
       color 0.2s ease;
@@ -147,7 +152,31 @@
 }
 
 @utility card-section {
-  @apply rounded-2xl border border-border bg-bg-card p-5 shadow-xs transition-all duration-200 hover:border-border-2;
+  @apply rounded-2xl border border-teal/15 bg-bg-card/70 p-5 backdrop-blur-xl transition-all duration-200 hover:border-teal/35;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 12px 40px rgba(0, 0, 0, 0.45);
+}
+
+@utility glass-panel {
+  @apply rounded-3xl border border-teal/15 bg-bg-card/60 backdrop-blur-2xl;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.05) inset,
+    0 24px 70px rgba(0, 0, 0, 0.55),
+    0 0 60px rgba(45, 212, 191, 0.06);
+}
+
+@utility glass-input {
+  @apply w-full rounded-xl border border-teal/15 bg-white/[0.03] px-4 py-2.5 text-sm text-text-1 placeholder:text-text-3 backdrop-blur transition-all;
+  &:focus {
+    @apply border-teal/60 outline-none;
+    box-shadow: 0 0 0 3px rgba(45, 212, 191, 0.12);
+  }
+}
+
+@utility btn-glow {
+  @apply rounded-xl bg-teal px-4 py-2.5 text-sm font-semibold text-[#04222a] transition-all hover:bg-teal-2 cursor-pointer;
+  box-shadow: 0 0 24px rgba(45, 212, 191, 0.45);
 }
 
 @utility ai-orb-spin {
