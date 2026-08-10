@@ -24,6 +24,7 @@ import { toast } from 'sonner';
 import { useAuth } from '@/lib/auth';
 import { useTheme } from '@/lib/theme';
 import { useI18n, LANGUAGES, type Lang } from '@/lib/i18n';
+import AiOrb from '@/components/AiOrb';
 import { cn } from '@/lib/utils';
 
 export type SettingsTab =
