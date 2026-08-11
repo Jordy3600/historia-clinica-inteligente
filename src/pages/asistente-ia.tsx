@@ -1431,7 +1431,7 @@ RESUMEN ESTRUCTURADO:
                     className={cn(
                       'space-y-3',
                       msg.role === 'user'
-                        ? 'rounded-[18px] bg-[#1a2232] border border-[#242e42] px-4 py-3 text-white shadow-sm'
+                        ? 'rounded-[14px] bg-[#1c1c1e] border border-white/[0.06] px-4 py-3 text-text-1 shadow-sm'
                         : 'text-text-1'
                     )}
                   >
@@ -1439,8 +1439,9 @@ RESUMEN ESTRUCTURADO:
                       <p className="whitespace-pre-wrap text-sm leading-relaxed">{msg.content}</p>
                     ) : (
                       <>
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-sm font-bold text-text-1">HistorIA AI</span>
+                        <div className="flex items-center gap-1.5 mb-2">
+                          <Plus className="h-4 w-4 text-teal stroke-[2.5]" />
+                          <span className="text-[14px] font-semibold text-teal-2">HistorIA AI</span>
                         </div>
                         <FormattedAssistantMessage text={msg.content} />
 
@@ -1701,7 +1702,8 @@ RESUMEN ESTRUCTURADO:
                     )}
                   </div>
 
-                  {/* Tiempo transcurrido */}
+                  {/* Separador + tiempo transcurrido */}
+                  <span className="h-4 w-px bg-white/15" />
                   <span className="text-xs font-mono font-medium text-white/80 min-w-[36px] text-center">
                     {formatSpeechTime(speechElapsedSeconds)}
                   </span>
@@ -1807,7 +1809,7 @@ RESUMEN ESTRUCTURADO:
             )}
 
             {/* Container Principal de Entrada (Exactamente como en la Imagen de Referencia) */}
-            <div className="rounded-[24px] border border-[#1c2433] bg-[#0c1017] p-3 shadow-2xl transition-all duration-300 focus-within:border-teal/60 focus-within:ring-1 focus-within:ring-teal/30">
+            <div className="rounded-[26px] border border-white/[0.07] bg-[#131313] px-3 py-2.5 shadow-2xl transition-all duration-300 focus-within:border-teal/50">
               <input
                 ref={fileInputRef}
                 type="file"
@@ -1817,32 +1819,15 @@ RESUMEN ESTRUCTURADO:
                 accept="image/*,.pdf,.doc,.docx,.txt"
               />
 
-              {/* Fila Superior: Input de Texto con Icono Waveform al Extremo Derecho */}
-              <div className="flex items-center justify-between gap-2 px-2 pt-1 pb-3">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      handleSubmit(e);
-                    }
-                  }}
-                  placeholder="Preguntar lo que quieras"
-                  className="w-full bg-transparent text-sm text-text-1 placeholder:text-text-3 outline-none border-none focus:outline-none focus:ring-0"
-                />
-              </div>
-
-              {/* Fila Inferior: Botón +, Micrófono a la izquierda; Botón Enviar Celeste a la derecha */}
-              <div className="flex items-center justify-between pt-1">
+              {/* Fila única: (+), micrófono, texto y botón cyan a la derecha */}
+              <div className="flex items-center gap-1.5">
                 <div className="flex items-center gap-2 relative">
                   {/* Botón (+) */}
                   <button
                     type="button"
                     onClick={() => setPlusMenuOpen((prev) => !prev)}
                     className={cn(
-                      'flex h-9 w-9 items-center justify-center rounded-full bg-[#182030] text-text-2 hover:bg-[#222c42] hover:text-text-1 transition-all cursor-pointer',
+                      'flex h-9 w-9 items-center justify-center rounded-full text-text-2 hover:bg-white/8 hover:text-text-1 transition-all cursor-pointer',
                       plusMenuOpen && 'bg-teal/20 text-teal border border-teal/40'
                     )}
                     title="Opciones avanzadas (+)"
@@ -1972,7 +1957,7 @@ RESUMEN ESTRUCTURADO:
                     type="button"
                     onClick={toggleVoice}
                     className={cn(
-                      'flex h-9 w-9 items-center justify-center rounded-full bg-[#182030] text-text-2 hover:bg-[#222c42] hover:text-text-1 transition-all cursor-pointer',
+                      'flex h-9 w-9 items-center justify-center rounded-full text-text-2 hover:bg-white/8 hover:text-text-1 transition-all cursor-pointer',
                       listening && 'bg-red-500/20 text-red-500 animate-pulse border border-red-500/40'
                     )}
                     title={listening ? 'Detener dictado por voz' : 'Dictado por voz'}
@@ -1980,6 +1965,20 @@ RESUMEN ESTRUCTURADO:
                     <Mic className="h-4.5 w-4.5" />
                   </button>
                 </div>
+
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSubmit(e);
+                    }
+                  }}
+                  placeholder="Preguntar lo que quieras"
+                  className="min-w-0 flex-1 bg-transparent px-2 text-[14px] text-text-1 placeholder:text-text-3 outline-none border-none focus:outline-none focus:ring-0"
+                />
 
                 {/* Botón Enviar Celeste (#00A8C6) */}
                 {input.trim() || attachments.length > 0 ? (
@@ -2051,7 +2050,7 @@ RESUMEN ESTRUCTURADO:
           <button
             type="button"
             onClick={handleCreateNewChat}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-teal/18 hover:bg-teal/28 border border-teal/25 py-3 px-4 text-[13px] font-semibold text-teal-2 transition-all cursor-pointer active:scale-[0.99]"
+            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-teal/30 bg-[#0d3d3a] hover:bg-[#12514c] py-3 px-4 text-[14px] font-semibold text-teal-2 transition-all cursor-pointer active:scale-[0.99] shadow-[0_0_20px_rgba(45,212,191,0.12)]"
           >
             <Plus className="h-4 w-4 stroke-[2.5]" />
             <span>Nuevo Chat</span>
