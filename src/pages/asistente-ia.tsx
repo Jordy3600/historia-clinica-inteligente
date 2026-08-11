@@ -1809,7 +1809,7 @@ RESUMEN ESTRUCTURADO:
             )}
 
             {/* Container Principal de Entrada (Exactamente como en la Imagen de Referencia) */}
-            <div className="rounded-[24px] border border-[#1c2433] bg-[#0c1017] p-3 shadow-2xl transition-all duration-300 focus-within:border-teal/60 focus-within:ring-1 focus-within:ring-teal/30">
+            <div className="rounded-[26px] border border-white/[0.07] bg-[#131313] px-3 py-2.5 shadow-2xl transition-all duration-300 focus-within:border-teal/50">
               <input
                 ref={fileInputRef}
                 type="file"
@@ -1819,32 +1819,15 @@ RESUMEN ESTRUCTURADO:
                 accept="image/*,.pdf,.doc,.docx,.txt"
               />
 
-              {/* Fila Superior: Input de Texto con Icono Waveform al Extremo Derecho */}
-              <div className="flex items-center justify-between gap-2 px-2 pt-1 pb-3">
-                <input
-                  type="text"
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === 'Enter' && !e.shiftKey) {
-                      e.preventDefault();
-                      handleSubmit(e);
-                    }
-                  }}
-                  placeholder="Preguntar lo que quieras"
-                  className="w-full bg-transparent text-sm text-text-1 placeholder:text-text-3 outline-none border-none focus:outline-none focus:ring-0"
-                />
-              </div>
-
-              {/* Fila Inferior: Botón +, Micrófono a la izquierda; Botón Enviar Celeste a la derecha */}
-              <div className="flex items-center justify-between pt-1">
+              {/* Fila única: (+), micrófono, texto y botón cyan a la derecha */}
+              <div className="flex items-center gap-1.5">
                 <div className="flex items-center gap-2 relative">
                   {/* Botón (+) */}
                   <button
                     type="button"
                     onClick={() => setPlusMenuOpen((prev) => !prev)}
                     className={cn(
-                      'flex h-9 w-9 items-center justify-center rounded-full bg-[#182030] text-text-2 hover:bg-[#222c42] hover:text-text-1 transition-all cursor-pointer',
+                      'flex h-9 w-9 items-center justify-center rounded-full text-text-2 hover:bg-white/8 hover:text-text-1 transition-all cursor-pointer',
                       plusMenuOpen && 'bg-teal/20 text-teal border border-teal/40'
                     )}
                     title="Opciones avanzadas (+)"
