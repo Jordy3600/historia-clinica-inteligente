@@ -1431,7 +1431,7 @@ RESUMEN ESTRUCTURADO:
                     className={cn(
                       'space-y-3',
                       msg.role === 'user'
-                        ? 'rounded-[18px] bg-[#1a2232] border border-[#242e42] px-4 py-3 text-white shadow-sm'
+                        ? 'rounded-[14px] bg-[#1c1c1e] border border-white/[0.06] px-4 py-3 text-text-1 shadow-sm'
                         : 'text-text-1'
                     )}
                   >
@@ -1439,8 +1439,9 @@ RESUMEN ESTRUCTURADO:
                       <p className="whitespace-pre-wrap text-sm leading-relaxed">{msg.content}</p>
                     ) : (
                       <>
-                        <div className="flex items-center gap-2 mb-2">
-                          <span className="text-sm font-bold text-text-1">HistorIA AI</span>
+                        <div className="flex items-center gap-1.5 mb-2">
+                          <Plus className="h-4 w-4 text-teal stroke-[2.5]" />
+                          <span className="text-[14px] font-semibold text-teal-2">HistorIA AI</span>
                         </div>
                         <FormattedAssistantMessage text={msg.content} />
 
