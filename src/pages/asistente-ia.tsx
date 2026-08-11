@@ -1702,7 +1702,8 @@ RESUMEN ESTRUCTURADO:
                     )}
                   </div>
 
-                  {/* Tiempo transcurrido */}
+                  {/* Separador + tiempo transcurrido */}
+                  <span className="h-4 w-px bg-white/15" />
                   <span className="text-xs font-mono font-medium text-white/80 min-w-[36px] text-center">
                     {formatSpeechTime(speechElapsedSeconds)}
                   </span>
