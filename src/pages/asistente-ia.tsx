@@ -1957,7 +1957,7 @@ RESUMEN ESTRUCTURADO:
                     type="button"
                     onClick={toggleVoice}
                     className={cn(
-                      'flex h-9 w-9 items-center justify-center rounded-full bg-[#182030] text-text-2 hover:bg-[#222c42] hover:text-text-1 transition-all cursor-pointer',
+                      'flex h-9 w-9 items-center justify-center rounded-full text-text-2 hover:bg-white/8 hover:text-text-1 transition-all cursor-pointer',
                       listening && 'bg-red-500/20 text-red-500 animate-pulse border border-red-500/40'
                     )}
                     title={listening ? 'Detener dictado por voz' : 'Dictado por voz'}
@@ -1965,6 +1965,20 @@ RESUMEN ESTRUCTURADO:
                     <Mic className="h-4.5 w-4.5" />
                   </button>
                 </div>
+
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' && !e.shiftKey) {
+                      e.preventDefault();
+                      handleSubmit(e);
+                    }
+                  }}
+                  placeholder="Preguntar lo que quieras"
+                  className="min-w-0 flex-1 bg-transparent px-2 text-[14px] text-text-1 placeholder:text-text-3 outline-none border-none focus:outline-none focus:ring-0"
+                />
 
                 {/* Botón Enviar Celeste (#00A8C6) */}
                 {input.trim() || attachments.length > 0 ? (
