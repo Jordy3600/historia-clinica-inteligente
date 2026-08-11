@@ -2050,7 +2050,7 @@ RESUMEN ESTRUCTURADO:
           <button
             type="button"
             onClick={handleCreateNewChat}
-            className="flex w-full items-center justify-center gap-2 rounded-2xl bg-teal/18 hover:bg-teal/28 border border-teal/25 py-3 px-4 text-[13px] font-semibold text-teal-2 transition-all cursor-pointer active:scale-[0.99]"
+            className="flex w-full items-center justify-center gap-2 rounded-2xl border border-teal/30 bg-[#0d3d3a] hover:bg-[#12514c] py-3 px-4 text-[14px] font-semibold text-teal-2 transition-all cursor-pointer active:scale-[0.99] shadow-[0_0_20px_rgba(45,212,191,0.12)]"
           >
             <Plus className="h-4 w-4 stroke-[2.5]" />
             <span>Nuevo Chat</span>
