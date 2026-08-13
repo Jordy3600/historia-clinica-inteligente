@@ -49,7 +49,6 @@ import {
   Calculator,
   ChevronRight,
   ListOrdered,
-  Globe,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useI18n } from '@/lib/i18n';
@@ -331,8 +330,6 @@ export default function AsistenteIAPage() {
   const [voiceErrorDetail, setVoiceErrorDetail] = useState<string | null>(null);
 
   // Web search & Deep research & Model state
-  const [useWebSearch, setUseWebSearch] = useState(false);
-  const [isDeepResearch, setIsDeepResearch] = useState(false);
   const [selectedModel, setSelectedModel] = useState<'flash' | 'sonnet' | 'pro'>('flash');
   const [modelMenuOpen, setModelMenuOpen] = useState(false);
 
@@ -789,12 +786,26 @@ RESUMEN ESTRUCTURADO:
         try { contentStr = await file.text(); } catch {}
       }
 
+      // Imágenes y PDF se envían al modelo como datos nativos (visión multimodal)
+      let dataUrl: string | undefined = undefined;
+      if (file.type.startsWith('image/') || file.type === 'application/pdf') {
+        try {
+          dataUrl = await new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result));
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+          });
+        } catch {}
+      }
+
       newAttachments.push({
         id: crypto.randomUUID(),
         name: file.name,
         type: file.type,
         size: file.size,
         content: contentStr,
+        dataUrl,
       });
     }
     setAttachments((prev) => [...prev, ...newAttachments]);
@@ -993,12 +1004,19 @@ RESUMEN ESTRUCTURADO:
           if (a.content) {
             return `[Archivo adjunto: ${a.name}]\nContenido del archivo:\n${a.content}`;
           }
+          if (a.dataUrl) {
+            return `[Archivo adjunto enviado al modelo: ${a.name} (${a.type})]`;
+          }
           return `[Archivo adjunto: ${a.name} (${a.type})]`;
         })
         .join('\n\n');
 
       fullPromptText = `${fullPromptText}\n\nArchivos adjuntos por el usuario:\n${attachInfo}`;
     }
+
+    const media = attachments
+      .filter((a) => a.dataUrl)
+      .map((a) => ({ name: a.name, type: a.type, dataUrl: a.dataUrl as string }));
 
     const userMsg: Message = {
       id: crypto.randomUUID(),
@@ -1027,7 +1045,7 @@ RESUMEN ESTRUCTURADO:
           history: messages.map((m) => ({ role: m.role, content: m.content })),
           patientContext,
           lang,
-          useWebSearch: useWebSearch || isDeepResearch,
+          media,
         }),
       });
 
