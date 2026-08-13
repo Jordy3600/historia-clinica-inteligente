@@ -22,11 +22,11 @@ export const Route = createFileRoute("/api/generate-medical-image")({
           return Response.json({ error: "Solicitud inválida." }, { status: 400 });
         }
 
-        const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+        const res = await fetch("https://ai.gateway.lovable.dev/v1/images/generations", {
           method: "POST",
           headers: { Authorization: `Bearer ${apiKey}`, "Content-Type": "application/json" },
           body: JSON.stringify({
-            model: "google/gemini-2.5-flash-image",
+            model: "google/gemini-3-pro-image",
             modalities: ["image", "text"],
             messages: [
               {
@@ -42,10 +42,9 @@ export const Route = createFileRoute("/api/generate-medical-image")({
           return Response.json({ error: "No se pudo generar la imagen médica." }, { status: 502 });
         }
 
-        const data = (await res.json()) as {
-          choices?: Array<{ message?: { images?: Array<{ image_url?: { url?: string } }> } }>;
-        };
-        const imageUrl = data.choices?.[0]?.message?.images?.[0]?.image_url?.url;
+        const data = (await res.json()) as { data?: Array<{ b64_json?: string }> };
+        const b64 = data.data?.[0]?.b64_json;
+        const imageUrl = b64 ? `data:image/png;base64,${b64}` : undefined;
         if (!imageUrl) {
           return Response.json({ error: "La IA no devolvió una imagen." }, { status: 502 });
         }
