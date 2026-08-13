@@ -1769,38 +1769,6 @@ RESUMEN ESTRUCTURADO:
               </div>
             )}
 
-            {/* Active Mode Badges (Web Search & Deep Research) */}
-            {(useWebSearch || isDeepResearch) && (
-              <div className="mb-2 flex flex-wrap items-center gap-2 px-2">
-                {useWebSearch && (
-                  <div className="flex items-center gap-1.5 rounded-full border border-teal/40 bg-teal/15 px-3 py-1 text-xs font-bold text-teal shadow-xs animate-fade-in">
-                    <Globe className="h-3.5 w-3.5" />
-                    <span>Buscar en la web</span>
-                    <button
-                      type="button"
-                      onClick={() => setUseWebSearch(false)}
-                      className="ml-1 text-teal/70 hover:text-teal cursor-pointer"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
-                  </div>
-                )}
-                {isDeepResearch && (
-                  <div className="flex items-center gap-1.5 rounded-full border border-blue/40 bg-blue/15 px-3 py-1 text-xs font-bold text-blue shadow-xs animate-fade-in">
-                    <Sparkles className="h-3.5 w-3.5 animate-spin" />
-                    <span>Búsqueda profunda (Deep Research)</span>
-                    <button
-                      type="button"
-                      onClick={() => setIsDeepResearch(false)}
-                      className="ml-1 text-blue/70 hover:text-blue cursor-pointer"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-
             {attachments.length > 0 && (
               <div className="mb-2.5 flex flex-wrap gap-2 px-2">
                 {attachments.map((att) => (
