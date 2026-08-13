@@ -11,6 +11,17 @@ const Body = z.object({
   patientContext: z.string().max(20000).optional().default(""),
   lang: z.string().max(10).optional().default("es"),
   useWebSearch: z.boolean().optional().default(false),
+  media: z
+    .array(
+      z.object({
+        name: z.string().max(300),
+        type: z.string().max(200),
+        dataUrl: z.string().max(15_000_000),
+      }),
+    )
+    .max(5)
+    .optional()
+    .default([]),
 });
 
 function systemPrompt(lang: string, patientContext: string, useWebSearch: boolean) {
@@ -48,12 +59,27 @@ export const Route = createFileRoute("/api/chat")({
             Authorization: `Bearer ${apiKey}`,
             "Content-Type": "application/json",
           },
+        const mediaBlocks = body.media.flatMap((m) => {
+          if (m.type.startsWith("image/")) {
+            return [{ type: "image_url", image_url: { url: m.dataUrl } }];
+          }
+          if (m.type === "application/pdf") {
+            return [{ type: "file", file: { filename: m.name, file_data: m.dataUrl } }];
+          }
+          return [];
+        });
+
+        const userContent =
+          mediaBlocks.length > 0
+            ? [{ type: "text", text: body.message }, ...mediaBlocks]
+            : body.message;
+
           body: JSON.stringify({
             model: "google/gemini-3.6-flash",
             messages: [
               { role: "system", content: systemPrompt(body.lang, body.patientContext, body.useWebSearch) },
               ...body.history,
-              { role: "user", content: body.message },
+              { role: "user", content: userContent },
             ],
           }),
         });
