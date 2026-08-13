@@ -6,6 +6,7 @@ export interface Attachment {
   type: string;
   size: number;
   content?: string;
+  dataUrl?: string;
 }
 
 export interface Message {
