@@ -53,7 +53,7 @@ export const Route = createFileRoute("/api/chat")({
           return Response.json({ error: "Solicitud inválida." }, { status: 400 });
         }
 
-        const mediaBlocks = body.media.flatMap((m) => {
+        const mediaBlocks = body.media.flatMap((m): Array<Record<string, unknown>> => {
           if (m.type.startsWith("image/")) {
             return [{ type: "image_url", image_url: { url: m.dataUrl } }];
           }
