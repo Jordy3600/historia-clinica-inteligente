@@ -1828,45 +1828,6 @@ RESUMEN ESTRUCTURADO:
                         Modos & Adjuntos Médicos
                       </div>
 
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setUseWebSearch((prev) => !prev);
-                          setPlusMenuOpen(false);
-                          toast.info(useWebSearch ? 'Búsqueda en la web desactivada' : '🌐 Búsqueda en la web ACTIVADA');
-                        }}
-                        className={cn(
-                          'flex w-full items-center justify-between rounded-xl px-3 py-2 text-left font-medium cursor-pointer transition-colors',
-                          useWebSearch ? 'bg-teal/15 text-teal font-bold' : 'text-text-2 hover:bg-bg-hover hover:text-text-1'
-                        )}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <Globe className="h-4 w-4 text-teal" />
-                          <span>Buscar en la web</span>
-                        </div>
-                        {useWebSearch && <Check className="h-4 w-4 text-teal" />}
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsDeepResearch((prev) => !prev);
-                          setPlusMenuOpen(false);
-                          toast.info(isDeepResearch ? 'Deep Research desactivado' : '🔬 Deep Research (Búsqueda Profunda) ACTIVADO');
-                        }}
-                        className={cn(
-                          'flex w-full items-center justify-between rounded-xl px-3 py-2 text-left font-medium cursor-pointer transition-colors',
-                          isDeepResearch ? 'bg-blue/15 text-blue font-bold' : 'text-text-2 hover:bg-bg-hover hover:text-text-1'
-                        )}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <Sparkles className="h-4 w-4 text-blue" />
-                          <span>Búsqueda profunda (Deep Research)</span>
-                        </div>
-                        {isDeepResearch && <Check className="h-4 w-4 text-blue" />}
-                      </button>
-
-                      <div className="border-t border-border/50 my-1" />
 
                       <button
                         type="button"
@@ -1922,19 +1883,6 @@ RESUMEN ESTRUCTURADO:
                         <span>Herramientas clínicas (Glasgow / CURB-65)</span>
                       </button>
 
-                      <div className="border-t border-border/50 my-1" />
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setPlusMenuOpen(false);
-                          setInput('Generar esquema anatómico o representación visual médica de: ');
-                        }}
-                        className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left font-semibold text-teal hover:bg-teal/10 cursor-pointer transition-colors"
-                      >
-                        <Wand2 className="h-4 w-4 text-teal" />
-                        <span>Generar Ilustración Médica</span>
-                      </button>
                     </div>
                   )}
 
