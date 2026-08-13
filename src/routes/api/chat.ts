@@ -53,12 +53,6 @@ export const Route = createFileRoute("/api/chat")({
           return Response.json({ error: "Solicitud inválida." }, { status: 400 });
         }
 
-        const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
-          method: "POST",
-          headers: {
-            Authorization: `Bearer ${apiKey}`,
-            "Content-Type": "application/json",
-          },
         const mediaBlocks = body.media.flatMap((m) => {
           if (m.type.startsWith("image/")) {
             return [{ type: "image_url", image_url: { url: m.dataUrl } }];
@@ -74,6 +68,12 @@ export const Route = createFileRoute("/api/chat")({
             ? [{ type: "text", text: body.message }, ...mediaBlocks]
             : body.message;
 
+        const res = await fetch("https://ai.gateway.lovable.dev/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            Authorization: `Bearer ${apiKey}`,
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             model: "google/gemini-3.6-flash",
             messages: [
