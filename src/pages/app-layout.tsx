@@ -69,9 +69,6 @@ export default function AppLayout() {
     { to: '/app/pacientes', label: 'Pacientes', icon: Users },
     { to: '/app/agenda', label: 'Agenda', icon: Calendar },
     { to: '/app/historial', label: 'Historial', icon: History },
-    { to: '/app/mapa', label: 'Mapa de clínicas', icon: MapPin },
-    { to: '/app/reportes', label: 'Reportes', icon: BarChart3 },
-    { to: '#configuracion', label: 'Configuración', icon: Settings, isSettings: true },
   ];
 
   const isActive = (to: string) =>
