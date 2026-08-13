@@ -49,7 +49,6 @@ import {
   Calculator,
   ChevronRight,
   ListOrdered,
-  Globe,
 } from 'lucide-react';
 import { toast } from 'sonner';
 import { useI18n } from '@/lib/i18n';
@@ -331,8 +330,6 @@ export default function AsistenteIAPage() {
   const [voiceErrorDetail, setVoiceErrorDetail] = useState<string | null>(null);
 
   // Web search & Deep research & Model state
-  const [useWebSearch, setUseWebSearch] = useState(false);
-  const [isDeepResearch, setIsDeepResearch] = useState(false);
   const [selectedModel, setSelectedModel] = useState<'flash' | 'sonnet' | 'pro'>('flash');
   const [modelMenuOpen, setModelMenuOpen] = useState(false);
 
@@ -789,12 +786,26 @@ RESUMEN ESTRUCTURADO:
         try { contentStr = await file.text(); } catch {}
       }
 
+      // Imágenes y PDF se envían al modelo como datos nativos (visión multimodal)
+      let dataUrl: string | undefined = undefined;
+      if (file.type.startsWith('image/') || file.type === 'application/pdf') {
+        try {
+          dataUrl = await new Promise<string>((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = () => resolve(String(reader.result));
+            reader.onerror = reject;
+            reader.readAsDataURL(file);
+          });
+        } catch {}
+      }
+
       newAttachments.push({
         id: crypto.randomUUID(),
         name: file.name,
         type: file.type,
         size: file.size,
         content: contentStr,
+        dataUrl,
       });
     }
     setAttachments((prev) => [...prev, ...newAttachments]);
@@ -993,12 +1004,19 @@ RESUMEN ESTRUCTURADO:
           if (a.content) {
             return `[Archivo adjunto: ${a.name}]\nContenido del archivo:\n${a.content}`;
           }
+          if (a.dataUrl) {
+            return `[Archivo adjunto enviado al modelo: ${a.name} (${a.type})]`;
+          }
           return `[Archivo adjunto: ${a.name} (${a.type})]`;
         })
         .join('\n\n');
 
       fullPromptText = `${fullPromptText}\n\nArchivos adjuntos por el usuario:\n${attachInfo}`;
     }
+
+    const media = attachments
+      .filter((a) => a.dataUrl)
+      .map((a) => ({ name: a.name, type: a.type, dataUrl: a.dataUrl as string }));
 
     const userMsg: Message = {
       id: crypto.randomUUID(),
@@ -1027,7 +1045,7 @@ RESUMEN ESTRUCTURADO:
           history: messages.map((m) => ({ role: m.role, content: m.content })),
           patientContext,
           lang,
-          useWebSearch: useWebSearch || isDeepResearch,
+          media,
         }),
       });
 
@@ -1751,38 +1769,6 @@ RESUMEN ESTRUCTURADO:
               </div>
             )}
 
-            {/* Active Mode Badges (Web Search & Deep Research) */}
-            {(useWebSearch || isDeepResearch) && (
-              <div className="mb-2 flex flex-wrap items-center gap-2 px-2">
-                {useWebSearch && (
-                  <div className="flex items-center gap-1.5 rounded-full border border-teal/40 bg-teal/15 px-3 py-1 text-xs font-bold text-teal shadow-xs animate-fade-in">
-                    <Globe className="h-3.5 w-3.5" />
-                    <span>Buscar en la web</span>
-                    <button
-                      type="button"
-                      onClick={() => setUseWebSearch(false)}
-                      className="ml-1 text-teal/70 hover:text-teal cursor-pointer"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
-                  </div>
-                )}
-                {isDeepResearch && (
-                  <div className="flex items-center gap-1.5 rounded-full border border-blue/40 bg-blue/15 px-3 py-1 text-xs font-bold text-blue shadow-xs animate-fade-in">
-                    <Sparkles className="h-3.5 w-3.5 animate-spin" />
-                    <span>Búsqueda profunda (Deep Research)</span>
-                    <button
-                      type="button"
-                      onClick={() => setIsDeepResearch(false)}
-                      className="ml-1 text-blue/70 hover:text-blue cursor-pointer"
-                    >
-                      <X className="h-3 w-3" />
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-
             {attachments.length > 0 && (
               <div className="mb-2.5 flex flex-wrap gap-2 px-2">
                 {attachments.map((att) => (
@@ -1839,48 +1825,8 @@ RESUMEN ESTRUCTURADO:
                   {plusMenuOpen && (
                     <div className="absolute left-0 bottom-12 z-50 w-72 rounded-2xl border border-border/80 bg-[#141824]/95 p-2 shadow-2xl backdrop-blur-2xl animate-fade-in space-y-1 text-xs">
                       <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text-3 border-b border-border/50 mb-1">
-                        Modos & Adjuntos Médicos
+                        Herramientas & Adjuntos Médicos
                       </div>
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setUseWebSearch((prev) => !prev);
-                          setPlusMenuOpen(false);
-                          toast.info(useWebSearch ? 'Búsqueda en la web desactivada' : '🌐 Búsqueda en la web ACTIVADA');
-                        }}
-                        className={cn(
-                          'flex w-full items-center justify-between rounded-xl px-3 py-2 text-left font-medium cursor-pointer transition-colors',
-                          useWebSearch ? 'bg-teal/15 text-teal font-bold' : 'text-text-2 hover:bg-bg-hover hover:text-text-1'
-                        )}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <Globe className="h-4 w-4 text-teal" />
-                          <span>Buscar en la web</span>
-                        </div>
-                        {useWebSearch && <Check className="h-4 w-4 text-teal" />}
-                      </button>
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setIsDeepResearch((prev) => !prev);
-                          setPlusMenuOpen(false);
-                          toast.info(isDeepResearch ? 'Deep Research desactivado' : '🔬 Deep Research (Búsqueda Profunda) ACTIVADO');
-                        }}
-                        className={cn(
-                          'flex w-full items-center justify-between rounded-xl px-3 py-2 text-left font-medium cursor-pointer transition-colors',
-                          isDeepResearch ? 'bg-blue/15 text-blue font-bold' : 'text-text-2 hover:bg-bg-hover hover:text-text-1'
-                        )}
-                      >
-                        <div className="flex items-center gap-2.5">
-                          <Sparkles className="h-4 w-4 text-blue" />
-                          <span>Búsqueda profunda (Deep Research)</span>
-                        </div>
-                        {isDeepResearch && <Check className="h-4 w-4 text-blue" />}
-                      </button>
-
-                      <div className="border-t border-border/50 my-1" />
 
                       <button
                         type="button"
@@ -1936,19 +1882,6 @@ RESUMEN ESTRUCTURADO:
                         <span>Herramientas clínicas (Glasgow / CURB-65)</span>
                       </button>
 
-                      <div className="border-t border-border/50 my-1" />
-
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setPlusMenuOpen(false);
-                          setInput('Generar esquema anatómico o representación visual médica de: ');
-                        }}
-                        className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 text-left font-semibold text-teal hover:bg-teal/10 cursor-pointer transition-colors"
-                      >
-                        <Wand2 className="h-4 w-4 text-teal" />
-                        <span>Generar Ilustración Médica</span>
-                      </button>
                     </div>
                   )}
 
