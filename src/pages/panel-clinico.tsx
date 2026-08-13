@@ -1,21 +1,16 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  Users,
-  FileText,
   Sparkles,
   Search,
   CheckCircle2,
   AlertTriangle,
-  Clock,
   Copy,
   Save,
-  Zap,
   Wand2,
   RefreshCw,
   FileCheck,
   UserCheck,
-  ShieldAlert,
   Check,
   X,
   Stethoscope,
