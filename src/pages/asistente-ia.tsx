@@ -1825,9 +1825,8 @@ RESUMEN ESTRUCTURADO:
                   {plusMenuOpen && (
                     <div className="absolute left-0 bottom-12 z-50 w-72 rounded-2xl border border-border/80 bg-[#141824]/95 p-2 shadow-2xl backdrop-blur-2xl animate-fade-in space-y-1 text-xs">
                       <div className="px-3 py-1 text-[10px] font-bold uppercase tracking-wider text-text-3 border-b border-border/50 mb-1">
-                        Modos & Adjuntos Médicos
+                        Herramientas & Adjuntos Médicos
                       </div>
-
 
                       <button
                         type="button"
