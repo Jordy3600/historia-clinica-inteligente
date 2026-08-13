@@ -6,9 +6,7 @@ import {
   FileText,
   Users,
   Calendar,
-  MapPin,
   History,
-  BarChart3,
   Stethoscope,
   Menu,
   X,
@@ -69,9 +67,6 @@ export default function AppLayout() {
     { to: '/app/pacientes', label: 'Pacientes', icon: Users },
     { to: '/app/agenda', label: 'Agenda', icon: Calendar },
     { to: '/app/historial', label: 'Historial', icon: History },
-    { to: '/app/mapa', label: 'Mapa de clínicas', icon: MapPin },
-    { to: '/app/reportes', label: 'Reportes', icon: BarChart3 },
-    { to: '#configuracion', label: 'Configuración', icon: Settings, isSettings: true },
   ];
 
   const isActive = (to: string) =>
@@ -81,7 +76,7 @@ export default function AppLayout() {
   // a pantalla completa con una flecha de retroceso.
   const isHome = location.pathname === '/app';
   const currentNav = NAV_ITEMS.find(
-    (item) => !item.isSettings && item.to !== '/app' && location.pathname.startsWith(item.to)
+    (item) => item.to !== '/app' && location.pathname.startsWith(item.to)
   );
   const isAssistant = location.pathname.startsWith('/app/asistente');
   const isFullBleed = isAssistant || location.pathname.startsWith('/app/mapa');
@@ -98,22 +93,8 @@ export default function AppLayout() {
       </div>
 
       <nav className="flex-1 space-y-1 overflow-y-auto px-3 py-2">
-        {NAV_ITEMS.map(({ to, label, icon: Icon, isSettings }) => {
+        {NAV_ITEMS.map(({ to, label, icon: Icon }) => {
           const active = isActive(to);
-          
-          if (isSettings) {
-            return (
-              <button
-                key={to}
-                type="button"
-                onClick={() => openSettingsTab('profile')}
-                className="group flex w-full items-center gap-3 rounded-xl px-3.5 py-2.5 text-xs sm:text-sm font-medium text-text-2 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
-              >
-                <Icon className="h-4.5 w-4.5 text-text-3 group-hover:text-text-1 flex-shrink-0" />
-                <span className="truncate">{label}</span>
-              </button>
-            );
-          }
 
           return (
             <Link
@@ -156,6 +137,14 @@ export default function AppLayout() {
             >
               <User className="h-4 w-4 text-teal" />
               <span>Perfil y cuenta</span>
+            </button>
+
+            <button
+              onClick={() => openSettingsTab('profile')}
+              className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 font-medium text-text-2 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
+            >
+              <Settings className="h-4 w-4 text-text-2" />
+              <span>Configuración</span>
             </button>
 
             <button
