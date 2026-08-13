@@ -140,6 +140,14 @@ export default function AppLayout() {
             </button>
 
             <button
+              onClick={() => openSettingsTab('profile')}
+              className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 font-medium text-text-2 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
+            >
+              <Settings className="h-4 w-4 text-text-2" />
+              <span>Configuración</span>
+            </button>
+
+            <button
               onClick={() => openSettingsTab('appearance')}
               className="flex w-full items-center gap-2.5 rounded-xl px-3 py-2 font-medium text-text-2 hover:bg-bg-hover hover:text-text-1 transition-all cursor-pointer"
             >
