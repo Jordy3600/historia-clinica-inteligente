@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { DictationButton } from '@/components/DictationButton';
 import { useNavigate } from 'react-router-dom';
 import {
   Sparkles,
@@ -288,8 +289,11 @@ export default function PanelClinicoPage() {
                 value={noteText}
                 onChange={(e) => setNoteText(e.target.value)}
                 placeholder="Escribe o dicta la nota de consulta médica aquí..."
-                className="w-full rounded-2xl border border-border bg-bg-hover/50 p-4 text-xs leading-relaxed text-text-1 placeholder-text-3 focus:border-teal/60 focus:outline-none focus:ring-2 focus:ring-teal/20 transition-all"
+                className="w-full rounded-2xl border border-border bg-bg-hover/50 p-4 pr-14 text-xs leading-relaxed text-text-1 placeholder-text-3 focus:border-teal/60 focus:outline-none focus:ring-2 focus:ring-teal/20 transition-all"
               />
+              <div className="absolute right-3 top-3">
+                <DictationButton value={noteText} onChange={setNoteText} />
+              </div>
               <div className="mt-1 flex items-center justify-between text-[10px] text-text-3 px-1">
                 <span>{noteText.length} caracteres • {noteText.split(/\s+/).filter(Boolean).length} palabras</span>
                 <button
