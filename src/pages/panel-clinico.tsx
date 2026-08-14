@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { DictationButton } from '@/components/DictationButton';
 import { useNavigate } from 'react-router-dom';
 import {
   Sparkles,
