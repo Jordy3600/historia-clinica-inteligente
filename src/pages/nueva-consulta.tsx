@@ -10,6 +10,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
+import { DictationButton } from '@/components/DictationButton';
 
 const SAMPLE_TEXT = `Motivo de consulta: Paciente femenina de 34 años que acude por dolor abdominal en epigastrio de 3 días de evolución, tipo cólico, intensidad moderada, que se exacerba tras la ingesta de alimentos grasos. Asociado a náuseas y vómitos en 2 oportunidades.
 
@@ -69,9 +70,12 @@ export default function NuevaConsultaPage() {
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="history"><FileText className="mr-1.5 inline h-3.5 w-3.5" />{t('consulta.historial')}</Label>
-                <button type="button" onClick={handleSample} className="text-xs font-medium text-blue hover:text-blue-hover transition-colors">{t('consulta.ejemplo')}</button>
+                <div className="flex items-center gap-2">
+                  <button type="button" onClick={handleSample} className="text-xs font-medium text-blue hover:text-blue-hover transition-colors">{t('consulta.ejemplo')}</button>
+                  <DictationButton value={rawHistory} onChange={setRawHistory} size="sm" />
+                </div>
               </div>
-              <Textarea id="history" placeholder="Pega aquí el historial clínico completo del paciente en texto libre…" className="min-h-[300px] resize-y font-serif text-sm leading-relaxed" value={rawHistory} onChange={e => setRawHistory(e.target.value)} maxLength={20000} required />
+              <Textarea id="history" placeholder="Pega o dicta aquí el historial clínico completo del paciente…" className="min-h-[300px] resize-y font-serif text-sm leading-relaxed" value={rawHistory} onChange={e => setRawHistory(e.target.value)} maxLength={20000} required />
               <div className="flex items-center justify-between">
                 <p className="text-xs text-text-2">La IA detecta automáticamente las secciones del historial.</p>
                 <p className="text-xs text-text-3 tabular-nums">{rawHistory.length.toLocaleString()} / 20,000</p>
