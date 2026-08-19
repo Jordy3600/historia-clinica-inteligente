@@ -1,0 +1,3 @@
+Remote configurado: git@github.com:Jordy3600/historia-clinica-inteligente.git
+Rama activa: main
+Commit inicial: feat: sincronización completa de HistorIA con Asistente IA, Dark Mode y base de datos (75 archivos)
